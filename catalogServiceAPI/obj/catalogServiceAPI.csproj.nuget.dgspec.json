@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jonat\\Desktop\\The-Featured-Bugz-Semester-4-Exam\\catalog-service\\catalogServiceAPI\\catalogServiceAPI.csproj": {}
+    "/Users/madsbaggelarsen/Desktop/eksamen/Kode/catalogservice/catalog-service/catalogServiceAPI/catalogServiceAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jonat\\Desktop\\The-Featured-Bugz-Semester-4-Exam\\catalog-service\\catalogServiceAPI\\catalogServiceAPI.csproj": {
+    "/Users/madsbaggelarsen/Desktop/eksamen/Kode/catalogservice/catalog-service/catalogServiceAPI/catalogServiceAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jonat\\Desktop\\The-Featured-Bugz-Semester-4-Exam\\catalog-service\\catalogServiceAPI\\catalogServiceAPI.csproj",
+        "projectUniqueName": "/Users/madsbaggelarsen/Desktop/eksamen/Kode/catalogservice/catalog-service/catalogServiceAPI/catalogServiceAPI.csproj",
         "projectName": "catalogServiceAPI",
-        "projectPath": "C:\\Users\\jonat\\Desktop\\The-Featured-Bugz-Semester-4-Exam\\catalog-service\\catalogServiceAPI\\catalogServiceAPI.csproj",
-        "packagesPath": "C:\\Users\\jonat\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jonat\\Desktop\\The-Featured-Bugz-Semester-4-Exam\\catalog-service\\catalogServiceAPI\\obj\\",
+        "projectPath": "/Users/madsbaggelarsen/Desktop/eksamen/Kode/catalogservice/catalog-service/catalogServiceAPI/catalogServiceAPI.csproj",
+        "packagesPath": "/Users/madsbaggelarsen/.nuget/packages/",
+        "outputPath": "/Users/madsbaggelarsen/Desktop/eksamen/Kode/catalogservice/catalog-service/catalogServiceAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\jonat\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/madsbaggelarsen/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -68,7 +66,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
         }
       }
     }
