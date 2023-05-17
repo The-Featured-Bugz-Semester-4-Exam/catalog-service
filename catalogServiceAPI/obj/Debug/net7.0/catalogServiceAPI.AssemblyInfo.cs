@@ -10,9 +10,11 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("catalogServiceAPI")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("\n          The Featured Bugz\n      ")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+[assembly: System.Reflection.AssemblyDescriptionAttribute("\n          0.1.0: første version af catalog-service, indholder forbindelse til Mo" +
+    "ngoDB samt metode \'GetAllItems\'\n\n      ")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("\n          0.1.0\n      ")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("catalogServiceAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("catalogServiceAPI")]
