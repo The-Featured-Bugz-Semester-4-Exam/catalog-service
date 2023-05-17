@@ -10,6 +10,13 @@
       </FileVersion>
       <Description>
           0.1.0: første version af catalog-service, indholder forbindelse til MongoDB samt metode 'GetAllItems'
+          0.1.1: Tilføjet metoden 'GetItemOnID' - Koden er ikke pæn, så den bør ændres
+          0.1.2: Ændrede i filer
+            oprettede hjælpeklasse ItemsRepository
+            oprettede interfacet IItemsRepository
+            Ændrede hjælpeklasse ItemsDBContext
+            Slettede interfacet IItemsDBContext
+                DB-connection er nede
 
       </Description>
 
