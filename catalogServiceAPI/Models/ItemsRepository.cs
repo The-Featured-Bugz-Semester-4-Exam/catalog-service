@@ -19,48 +19,91 @@ namespace catalogServiceAPI.Models
             _logger = logger;
             _config = config;
             _context = new ItemsDBContext(config);
-            _logger.LogInformation($"connecitonstring er: {config["connectionString"]} ");
+            _logger.LogInformation($"INFO: connecitonstring er: {config["connectionString"]} ");
         }
 
 
+        //Metode til at hente alle items
 
         public List<Item> GetAllItems()
         {
             var list = _context.Items.Find(_ => true).ToList();
-            _logger.LogInformation($"indhold af liste: {list}");
+            _logger.LogInformation($"INFO: indhold af liste: {list}");
             return list;
         }
 
 
+        //Metode til at hente et item på ID
 
         public Item GetItemOnID(int ID)
         {
             var items = _context.Items.Find(_ => true).ToList();
             var item = items.FirstOrDefault(i => i.ItemID == ID);
-            _logger.LogInformation($"Indhold af item: {item}");
+            _logger.LogInformation($"INFO: Indhold af item: {item}");
             return item;
         }
 
 
+        //Metode til at oprette et item i Postman med JSON
 
         public void PostItem(Item item)
         {
-            _logger.LogInformation($"Indhold af item til post: {item}");
+            _logger.LogInformation($"INFO: Indhold af item til post: {item}");
             _context.Items.InsertOne(item);
         }
 
 
+        //Metode til at slette et item på ID eller dø i forsøget
 
         public bool DeleteItem(int ID)
         {
-            throw new NotImplementedException("not implementet");
+            _logger.LogInformation($"INFO: ID på item flagged for delete: {ID}");
+            var filter = Builders<Item>.Filter.Eq(item => item.ItemID, ID);
+            var result = _context.Items.DeleteOne(filter);
+            _context.Items.DeleteOne(filter);
+
+            if (result.DeletedCount == 1)
+            {
+                _logger.LogInformation($"SUCCES: Item med ID {ID} er blevet slettet");
+                return true;
+            }
+            else
+            {
+                _logger.LogInformation($"FEJL: Item med ID'et {ID} overlevede og kommer nu efter dig for hævn");
+                return false;
+            }
         }
 
 
+        //Metode til at opdaterer et item
 
-        public bool UpdateItem(Item item)
+        public bool UpdateItem(int ID, Item updatedItem)
         {
-            throw new NotImplementedException("not implementet");
+            {
+                _logger.LogInformation($"INFO: ID på item flagged til opdatering: {ID}");
+                var filter = Builders<Item>.Filter.Eq(i => i.ItemID, ID);
+                var existingItem = _context.Items.Find(filter).FirstOrDefault();
+
+                if (existingItem != null)
+                {
+                    existingItem.ItemName = updatedItem.ItemName;
+                    existingItem.ItemDescription = updatedItem.ItemDescription;
+                    existingItem.ItemStartPrice = updatedItem.ItemStartPrice;
+                    existingItem.ItemSellerID = updatedItem.ItemSellerID;
+                    existingItem.ItemStartDate = updatedItem.ItemStartDate;
+                    existingItem.ItemEndDate = updatedItem.ItemEndDate;
+
+                    var result = _context.Items.ReplaceOne(filter, existingItem);
+                    bool isUpdated = result.ModifiedCount > 0;
+
+                    return isUpdated;
+                }
+
+                else
+                {
+                    return false;
+                }
+            }
         }
     }
 }

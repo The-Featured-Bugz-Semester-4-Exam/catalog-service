@@ -23,7 +23,7 @@ public class ItemController : ControllerBase
 
     //Metode til at få alle Items ud af ItemsDB'en
 
-    [HttpGet("get/all")]
+    [HttpGet("Get/All")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
     public IActionResult GetAllItems()
     {
@@ -98,59 +98,60 @@ public class ItemController : ControllerBase
 
     //Metode til at delete et item
 
-    [HttpDelete("Delete/{ID}")]
+    [HttpDelete("delete/{ID}")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
     public IActionResult DeleteItem(int ID)
     {
         try
         {
-            _logger.LogInformation("INFO: Metode DeleteItem kaldt {DT}" +
+            _logger.LogInformation("INFO: Metode DeleteItem kaldt {DT} på Item med ID {ID}" +
             DateTime.UtcNow.ToLongTimeString());
 
-            var objectID = ID;
-            var filter = Builders<Item>.Filter.Eq("ItemID", objectID);
+            var item = _repository.DeleteItem(ID);
 
-            Console.WriteLine($"hvad er i filteret?: {filter}");
-            Console.WriteLine($"er filteret null?: {filter != null}");
-
-
-            if (filter == null)
-            {
-                _logger.LogInformation($"FEJL: Item med ItemID: {ID} ikke fundet" + StatusCodes.Status404NotFound,
-                DateTime.UtcNow.ToLongTimeString());
-
-                return NotFound();
-            }
-
-            _logger.LogInformation($"INFO: Item med ItemID: {ID} fundet",
-            DateTime.UtcNow.ToLongTimeString());
-
-            throw new NotImplementedException("under ombygning");
-            /*
-            var result = db.Items.DeleteOne(filter);
-
-            if (result.DeletedCount > 0)
-            {
-                _logger.LogInformation($"SUCCES: Item med ItemID: {ID} slettet" + StatusCodes.Status200OK,
-                DateTime.UtcNow.ToLongTimeString());
-
-                return Ok();
-            }
-
-            _logger.LogInformation("FEJL: Metode DeleteItem kaldt {DT}, den blev ikke slettet",
-            DateTime.UtcNow.ToLongTimeString());
-
-            return StatusCode(StatusCodes.Status417ExpectationFailed);
-            */
+            return Ok();
         }
         catch (Exception ex)
         {
             _logger.LogInformation("FEJL: Metode DeleteItem kaldt {DT}, det gik galt" + ex,
             DateTime.UtcNow.ToLongTimeString());
 
-            return StatusCode(StatusCodes.Status500InternalServerError);
+            return StatusCode(StatusCodes.Status418ImATeapot);
         }
     }
 
 
+    //Metode til at update et item
+
+    [HttpPut("update/{ID}")]
+    [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
+    public IActionResult UpdateItem(int ID, Item item)
+    {
+        try
+        {
+            _logger.LogInformation("INFO: Metode DeleteItem kaldt {DT} på Item med ID {ID}" +
+            DateTime.UtcNow.ToLongTimeString());
+
+            bool isUpdated = _repository.UpdateItem(ID, item);
+
+            if (isUpdated == true)
+            {
+                _logger.LogInformation($"SUCCES: item med ID {ID} blev modificeret");
+                return Ok();
+            }
+
+            else
+            {
+                _logger.LogInformation($"FEJL: item med ID {ID} blev ikke modificeret");
+                return StatusCode(StatusCodes.Status304NotModified);
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogInformation("FEJL: Metode DeleteItem kaldt {DT}, det gik galt" + ex,
+            DateTime.UtcNow.ToLongTimeString());
+
+            return StatusCode(StatusCodes.Status418ImATeapot);
+        }
+    }
 }

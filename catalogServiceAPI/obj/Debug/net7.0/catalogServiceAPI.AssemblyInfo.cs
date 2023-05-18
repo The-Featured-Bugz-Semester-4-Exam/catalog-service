@@ -27,7 +27,7 @@ using System.Reflection;
           0.2.0: Metode 'PostItem' virker
                  opdaterede 'GetAllItems' og 'GetItemOnID'
       ")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("\n          0.1.0\n      ")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("\n          0.2.0\n      ")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("catalogServiceAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("catalogServiceAPI")]
