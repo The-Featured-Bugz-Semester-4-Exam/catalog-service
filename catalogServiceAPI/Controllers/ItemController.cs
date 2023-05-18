@@ -25,21 +25,23 @@ public class ItemController : ControllerBase
 
     [HttpGet("get/all")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
-    public List<Item> GetAllItems()
+    public IActionResult GetAllItems()
     {
         try
         {
             _logger.LogInformation("SUCCES: Metode GetAllItems kaldt {DT}, det gik fint" + StatusCodes.Status200OK,
             DateTime.UtcNow.ToLongTimeString());
 
-            return _repository.GetAllItems();
+            var list = _repository.GetAllItems();
+
+            return Ok(list);
         }
         catch (Exception ex)
         {
             _logger.LogInformation("FEJL: Metode GetAllItems kaldt {DT}, det gik galt" + ex,
             DateTime.UtcNow.ToLongTimeString());
 
-            return null;
+            return StatusCode(StatusCodes.Status418ImATeapot);
         }
     }
 
@@ -48,21 +50,23 @@ public class ItemController : ControllerBase
 
     [HttpGet("Get/{ID}")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
-    public Item GetItemOnID(int ID)
+    public IActionResult GetItemOnID(int ID)
     {
         try
         {
             _logger.LogInformation("INFO: Metode GetItemOnID kaldt {DT}",
             DateTime.UtcNow.ToLongTimeString());
 
-            return _repository.GetItemOnID(ID);
+            var item = _repository.GetItemOnID(ID);
+
+            return Ok(item);
         }
         catch (Exception ex)
         {
             _logger.LogInformation("FEJL: Metode GetItemOnID kaldt {DT}, det gik galt" + ex,
             DateTime.UtcNow.ToLongTimeString());
 
-            return null;
+            return StatusCode(StatusCodes.Status418ImATeapot);
         }
     }
 
@@ -71,7 +75,7 @@ public class ItemController : ControllerBase
 
     [HttpPost("PostItem")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
-    public void PostItem([FromBody] Item item)
+    public IActionResult PostItem([FromBody] Item item)
     {
         try
         {
@@ -79,11 +83,15 @@ public class ItemController : ControllerBase
             DateTime.UtcNow.ToLongTimeString());
 
             _repository.PostItem(item);
+
+            return Ok();
         }
         catch (Exception ex)
         {
             _logger.LogInformation("FEJL: Metode PostItem kaldt {DT}, det gik galt" + ex,
             DateTime.UtcNow.ToLongTimeString());
+
+            return StatusCode(StatusCodes.Status304NotModified);
         }
     }
 

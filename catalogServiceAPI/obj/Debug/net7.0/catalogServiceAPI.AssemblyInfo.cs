@@ -24,6 +24,8 @@ using System.Reflection;
           0.1.3: fik funktionalitet fra hjælpeklasserne til at virke
                  Metoder 'GetAllItems' og 'GetItemsOnID' virker nu
                  -- DB-connection er oppe igen
+          0.2.0: Metode 'PostItem' virker
+                 opdaterede 'GetAllItems' og 'GetItemOnID'
       ")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("\n          0.1.0\n      ")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]

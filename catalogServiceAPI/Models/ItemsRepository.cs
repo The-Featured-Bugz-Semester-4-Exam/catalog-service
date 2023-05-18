@@ -45,8 +45,8 @@ namespace catalogServiceAPI.Models
 
         public void PostItem(Item item)
         {
-            throw new NotImplementedException("not implementet");
-            //db.Items.InsertOne(item)
+            _logger.LogInformation($"Indhold af item til post: {item}");
+            _context.Items.InsertOne(item);
         }
 
 
