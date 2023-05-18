@@ -7,25 +7,24 @@ namespace catalogServiceAPI.Models
 {
     public class ItemsDBContext
     {
-        public readonly IMongoDatabase mongoDatabase;
-        public readonly IMongoCollection<Item> mongoCollection;
-        public ItemsDBContext()
+        private readonly IConfiguration _config;
+
+        public ItemsDBContext(IConfiguration config)
         {
-            string connectionString = "mongodb://localhost:27017/"; //Vores ConnectionString - Lige nu LocalHost
-            var client = new MongoClient(connectionString);
-
-            string databaseName = "ItemsDB"; //Vores DB - ItemsDB
-            var mongoDatabase = client.GetDatabase("ItemsDB");
-
-            string collectionName = "Items"; // Vores Collection
-            var mongoCollection = mongoDatabase.GetCollection<Item>("Items");
+            _config = config;
         }
 
         public IMongoCollection<Item> Items
         {
             get
             {
-                Console.WriteLine($"indhold af DB: {mongoCollection}");
+                string connectionString = _config["connectionString"]; //Vores ConnectionString - Lige nu LocalHost
+                var client = new MongoClient(connectionString);
+
+                string databaseName = "ItemsDB"; //Vores DB - ItemsDB
+                var mongoDatabase = client.GetDatabase("ItemsDB");
+
+                string collectionName = "Items"; // Vores Collection
                 return mongoDatabase.GetCollection<Item>("Items");
             }
         }

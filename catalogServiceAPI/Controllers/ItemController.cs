@@ -10,21 +10,15 @@ namespace catalogServiceAPI.Controllers;
 [Route("[controller]")]
 public class ItemController : ControllerBase
 {
-    ItemsDBContext db = new ItemsDBContext();
-
-    private readonly IItemsDBContext collection = new ItemsDBContext();
-
     private readonly ILogger<ItemController> _logger;
 
-    public ItemController(ILogger<ItemController> logger)
+    private readonly IItemsRepository _repository;
+
+    public ItemController(ILogger<ItemController> logger, IItemsRepository repository)
     {
         _logger = logger;
+        _repository = repository;
     }
-
-
-
-
-
 
 
     //Metode til at få alle Items ud af ItemsDB'en
@@ -38,9 +32,7 @@ public class ItemController : ControllerBase
             _logger.LogInformation("SUCCES: Metode GetAllItems kaldt {DT}, det gik fint" + StatusCodes.Status200OK,
             DateTime.UtcNow.ToLongTimeString());
 
-            var list = db.Items.Find(_ => true).ToList();
-            _logger.LogInformation($"{list.First()}");
-            return list;
+            return _repository.GetAllItems();
         }
         catch (Exception ex)
         {
@@ -52,81 +44,22 @@ public class ItemController : ControllerBase
     }
 
 
-
-
-
-
-
     //Metode til at få et specifikt Item ud af ItemsDB'en
 
     [HttpGet("Get/{ID}")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
-    public IActionResult GetItemOnID(int ID)
+    public Item GetItemOnID(int ID)
     {
         try
         {
             _logger.LogInformation("INFO: Metode GetItemOnID kaldt {DT}",
             DateTime.UtcNow.ToLongTimeString());
-            //var items = db.Items.Find(_ => true).ToList();
-            //var item = db.Items.Find(i => i.ItemID == ID).FirstOrDefault();
 
-            var item = db.Items.Find(i => i.ItemID == ID).FirstOrDefault();
-            
-            if (item == null)
-            {
-                _logger.LogInformation("FEJL: variabel 'item' har intet indhold" + StatusCodes.Status204NoContent,
-                DateTime.UtcNow.ToLongTimeString());
-
-                return NoContent();
-            }
-            _logger.LogInformation("SUCCES: Metode GetItemOnID returnerede item" + StatusCodes.Status200OK,
-            DateTime.UtcNow.ToLongTimeString());
-
-            return Ok(item);
-
-
-            /*
-            foreach (var i in items)
-            {
-                if (i.ItemID == ID)
-                {
-                    item = i;
-                }
-            }
-            _logger.LogInformation($"INFO: indhold af item: {item}");
-            return item;*/
+            return _repository.GetItemOnID(ID);
         }
         catch (Exception ex)
         {
             _logger.LogInformation("FEJL: Metode GetItemOnID kaldt {DT}, det gik galt" + ex,
-            DateTime.UtcNow.ToLongTimeString());
-
-            return NotFound();
-        }
-    }
-
-
-
-
-
-
-
-
-    [HttpPost("PostItem")]
-    [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
-    public IActionResult PostItem([FromBody] Item item)
-    {
-        try
-        {
-            _logger.LogInformation("SUCCES: Metode PostItem kaldt {DT}, det gik fint" + StatusCodes.Status200OK,
-            DateTime.UtcNow.ToLongTimeString());
-
-            //_item.Add(item);
-            return Ok();
-        }
-        catch (Exception ex)
-        {
-            _logger.LogInformation("FEJL: Metode PostItem kaldt {DT}, det gik galt" + ex,
             DateTime.UtcNow.ToLongTimeString());
 
             return null;
@@ -134,11 +67,28 @@ public class ItemController : ControllerBase
     }
 
 
+    //Metode til at oprette et item i cataloget
+
+    [HttpPost("PostItem")]
+    [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
+    public void PostItem([FromBody] Item item)
+    {
+        try
+        {
+            _logger.LogInformation("SUCCES: Metode PostItem kaldt {DT}, det gik fint" + StatusCodes.Status200OK,
+            DateTime.UtcNow.ToLongTimeString());
+
+            _repository.PostItem(item);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogInformation("FEJL: Metode PostItem kaldt {DT}, det gik galt" + ex,
+            DateTime.UtcNow.ToLongTimeString());
+        }
+    }
 
 
-
-
-
+    //Metode til at delete et item
 
     [HttpDelete("Delete/{ID}")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
@@ -167,6 +117,8 @@ public class ItemController : ControllerBase
             _logger.LogInformation($"INFO: Item med ItemID: {ID} fundet",
             DateTime.UtcNow.ToLongTimeString());
 
+            throw new NotImplementedException("under ombygning");
+            /*
             var result = db.Items.DeleteOne(filter);
 
             if (result.DeletedCount > 0)
@@ -181,7 +133,7 @@ public class ItemController : ControllerBase
             DateTime.UtcNow.ToLongTimeString());
 
             return StatusCode(StatusCodes.Status417ExpectationFailed);
-
+            */
         }
         catch (Exception ex)
         {

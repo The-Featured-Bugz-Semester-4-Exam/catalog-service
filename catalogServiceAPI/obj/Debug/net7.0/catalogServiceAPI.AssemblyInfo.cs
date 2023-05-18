@@ -16,12 +16,14 @@ using System.Reflection;
           0.1.0: første version af catalog-service, indholder forbindelse til MongoDB samt metode 'GetAllItems'
           0.1.1: Tilføjet metoden 'GetItemOnID' - Koden er ikke pæn, så den bør ændres
           0.1.2: Ændrede i filer
-            oprettede hjælpeklasse ItemsRepository
-            oprettede interfacet IItemsRepository
-            Ændrede hjælpeklasse ItemsDBContext
-            Slettede interfacet IItemsDBContext
-                DB-connection er nede
-
+                 oprettede hjælpeklasse ItemsRepository
+                 oprettede interfacet IItemsRepository
+                 Ændrede hjælpeklasse ItemsDBContext
+                 Slettede interfacet IItemsDBContext
+                 -- DB-connection er nede --
+          0.1.3: fik funktionalitet fra hjælpeklasserne til at virke
+                 Metoder 'GetAllItems' og 'GetItemsOnID' virker nu
+                 -- DB-connection er oppe igen
       ")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("\n          0.1.0\n      ")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
