@@ -26,8 +26,15 @@ using System.Reflection;
                  -- DB-connection er oppe igen
           0.2.0: Metode 'PostItem' virker
                  opdaterede 'GetAllItems' og 'GetItemOnID'
+          0.2.1: lavede metoden 'UpdateItem'
+                    den virker i Postman med PUT
+                    den bruger et ID (int) og en JSON-body
+                 alle metoder er testet og virker stadig
+          0.3.0: Lavede metoderne 'ScheduledTimer' og 'RemoveExpiredItems' (ikke testet endnu)
+                 Tilføjede tekst-doc med data i CSV-format som passer til DB'en
+                 
       ")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("\n          0.2.0\n      ")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("\n          0.2.1\n      ")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("catalogServiceAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("catalogServiceAPI")]

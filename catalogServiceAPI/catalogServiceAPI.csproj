@@ -6,7 +6,7 @@
           The Featured Bugz
       </Company>
       <FileVersion>
-          0.2.0
+          0.2.1
       </FileVersion>
       <Description>
           0.1.0: første version af catalog-service, indholder forbindelse til MongoDB samt metode 'GetAllItems'
@@ -22,6 +22,13 @@
                  -- DB-connection er oppe igen
           0.2.0: Metode 'PostItem' virker
                  opdaterede 'GetAllItems' og 'GetItemOnID'
+          0.2.1: lavede metoden 'UpdateItem'
+                    den virker i Postman med PUT
+                    den bruger et ID (int) og en JSON-body
+                 alle metoder er testet og virker stadig
+          0.3.0: Lavede metoderne 'ScheduledTimer' og 'RemoveExpiredItems' (ikke testet endnu)
+                 Tilføjede tekst-doc med data i CSV-format som passer til DB'en
+                 
       </Description>
 
     <TargetFramework>net7.0</TargetFramework>

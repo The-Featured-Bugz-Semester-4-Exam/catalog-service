@@ -10,6 +10,7 @@ namespace catalogServiceAPI.Models
         void PostItem(Item item);
         bool UpdateItem(int ItemID, Item item);
         bool DeleteItem(int ItemID);
+        void RemoveExpiredItems()
     }
 }
 

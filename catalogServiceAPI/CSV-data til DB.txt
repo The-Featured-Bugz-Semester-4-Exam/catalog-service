@@ -1,0 +1,93 @@
+﻿ItemID,ItemName,ItemDescription,ItemStartPrice,ItemSellerID,ItemStartDate,ItemEndDate
+100,"Vintage Watch","Beautiful vintage watch in excellent condition",25000,7,2023-05-12T08:00:00Z,2023-05-19T18:00:00Z
+101,"Designer Handbag","Luxurious designer handbag in black leather",18000,3,2023-05-10T12:00:00Z,2023-05-17T12:00:00Z
+102,"Smart TV","High-definition smart TV with built-in streaming apps",60000,8,2023-05-08T10:00:00Z,2023-05-15T10:00:00Z
+103,"Gaming Laptop","Powerful gaming laptop with high-performance specifications",80000,2,2023-05-14T16:00:00Z,2023-05-21T16:00:00Z
+104,"Dining Table Set","Elegant dining table set with six chairs",35000,6,2023-05-11T09:00:00Z,2023-05-18T09:00:00Z
+105,"Digital Camera","Compact digital camera with advanced features",12000,5,2023-05-13T14:00:00Z,2023-05-20T14:00:00Z
+106,"Fitness Tracker","Smart fitness tracker for monitoring your daily activities",4000,9,2023-05-09T11:00:00Z,2023-05-16T11:00:00Z
+107,"Wireless Earbuds","True wireless earbuds with noise-cancellation technology",6000,1,2023-05-07T13:00:00Z,2023-05-14T13:00:00Z
+108,"Kitchen Appliances","Set of essential kitchen appliances for modern cooking",20000,4,2023-05-15T15:00:00Z,2023-05-22T15:00:00Z
+109,"Portable Speaker","Portable Bluetooth speaker for music on the go",3000,10,2023-05-06T17:00:00Z,2023-05-13T17:00:00Z
+110,"Leather Jacket","Stylish leather jacket for a fashionable look",15000,4,2023-04-30T08:00:00Z,2023-05-07T08:00:00Z
+111,"Smartphone","Latest smartphone with advanced features and high-speed performance",70000,9,2023-05-02T12:00:00Z,2023-05-09T12:00:00Z
+112,"Home Theater System","Complete home theater system for immersive audio experience",50000,3,2023-04-29T10:00:00Z,2023-05-06T10:00:00Z
+113,"Fitness Equipment","Set of fitness equipment for a complete workout routine",25000,7,2023-05-01T16:00:00Z,2023-05-08T16:00:00Z
+114,"Designer Sunglasses","Trendy designer sunglasses with UV protection",8000,2,2023-04-28T09:00:00Z,2023-05-05T09:00:00Z
+115,"Electric Guitar","High-quality electric guitar for passionate musicians",40000,8,2023-05-03T14:00:00Z,2023-05-10T14:00:00Z
+116,"Digital Watch","Sleek digital watch with multiple time zone support",6000,5,2023-04-27T11:00:00Z,2023-05-04T11:00:00Z
+117,"Outdoor Furniture","Comfortable outdoor furniture set for relaxing in the garden",20000,1,2023-05-05T13:00:00Z,2023-05-12T13:00:00Z
+118,"Wireless Headphones","Wireless headphones with noise-cancellation and long battery life",12000,6,2023-04-26T15:00:00Z,2023-05-03T15:00:00Z
+119,"Coffee Machine","Premium coffee machine for brewing barista-quality coffee",18000,10,2023-05-04T17:00:00Z,2023-05-11T17:00:00Z
+120,"Designer Dress","Elegant designer dress for special occasions",30000,4,2023-04-25T08:00:00Z,2023-05-02T08:00:00Z
+121,"Tablet Computer","Portable tablet computer for productivity and entertainment",25000,9,2023-04-27T12:00:00Z,2023-05-04T12:00:00Z
+122,"Home Security System","Comprehensive home security system for peace of mind",45000,3,2023-04-24T10:00:00Z,2023-05-01T10:00:00Z
+123,"Yoga Mat","High-quality yoga mat for comfortable yoga sessions",5000,7,2023-04-26T16:00:00Z,2023-05-03T16:00:00Z
+124,"Camera Drone","Advanced camera drone for capturing aerial photos and videos",70000,2,2023-04-23T09:00:00Z,2023-04-30T09:00:00Z
+125,"Running Shoes","Premium running shoes with cushioning and stability features",12000,8,2023-04-29T14:00:00Z,2023-05-06T14:00:00Z
+126,"Wireless Mouse","Wireless mouse for convenient and hassle-free computer navigation",3000,5,2023-04-22T11:00:00Z,2023-04-29T11:00:00Z
+127,"Outdoor Grill","Durable outdoor grill for enjoying delicious barbecue meals",35000,1,2023-04-30T13:00:00Z,2023-05-07T13:00:00Z
+128,"Bluetooth Speaker","Compact Bluetooth speaker with powerful sound output",8000,6,2023-04-21T15:00:00Z,2023-04-28T15:00:00Z
+129,"Air Purifier","Efficient air purifier for cleaner and healthier indoor air",15000,10,2023-04-29T17:00:00Z,2023-05-06T17:00:00Z
+130,"Designer Shoes","Stylish designer shoes for a fashionable look",25000,4,2023-04-20T08:00:00Z,2023-04-27T08:00:00Z
+131,"Smart Thermostat","Smart thermostat for easy temperature control and energy savings",10000,9,2023-04-22T12:00:00Z,2023-04-29T12:00:00Z
+132,"Gaming Console","Latest gaming console for immersive gaming experiences",60000,3,2023-04-19T10:00:00Z,2023-04-26T10:00:00Z
+133,"Dumbbell Set","Set of dumbbells for strength training and muscle building",20000,7,2023-04-21T16:00:00Z,2023-04-28T16:00:00Z
+134,"Bluetooth Earphones","Wireless Bluetooth earphones for music and calls on the go",6000,2,2023-04-18T09:00:00Z,2023-04-25T09:00:00Z
+135,"Digital Camera","Professional digital camera for capturing high-quality photos",80000,8,2023-04-24T14:00:00Z,2023-05-01T14:00:00Z
+136,"Smartwatch","Feature-rich smartwatch with health and fitness tracking",15000,5,2023-04-17T11:00:00Z,2023-04-24T11:00:00Z
+137,"Blender","Powerful blender for making smoothies and other beverages",10000,1,2023-04-25T13:00:00Z,2023-05-02T13:00:00Z
+138,"Wireless Keyboard","Wireless keyboard for comfortable typing and convenience",4000,6,2023-04-16T15:00:00Z,2023-04-23T15:00:00Z
+139,"Outdoor Umbrella","Large outdoor umbrella for providing shade on sunny days",12000,10,2023-04-24T17:00:00Z,2023-05-01T17:00:00Z
+140,"Headphone Amplifier","Headphone amplifier for enhanced audio performance",5000,4,2023-04-15T08:00:00Z,2023-04-22T08:00:00Z
+141,"Portable Speaker","Compact and portable speaker for music on the go",8000,9,2023-04-17T12:00:00Z,2023-04-24T12:00:00Z
+142,"Home Projector","High-quality home projector for cinematic viewing experience",40000,3,2023-04-14T10:00:00Z,2023-04-21T10:00:00Z
+143,"Resistance Bands","Set of resistance bands for strength training and flexibility",5000,7,2023-04-16T16:00:00Z,2023-04-23T16:00:00Z
+144,"Portable Charger","Portable charger for charging devices on the go",6000,2,2023-04-13T09:00:00Z,2023-04-20T09:00:00Z
+145,"Camping Tent","Spacious camping tent for outdoor adventures",20000,8,2023-04-19T14:00:00Z,2023-04-26T14:00:00Z
+146,"Bluetooth Headset","Bluetooth headset for hands-free calling and audio playback",5000,5,2023-04-12T11:00:00Z,2023-04-19T11:00:00Z
+147,"Home Air Conditioner","Efficient home air conditioner for optimal indoor climate",80000,1,2023-04-20T13:00:00Z,2023-04-27T13:00:00Z
+148,"Yoga Blocks","Set of yoga blocks for improved balance and flexibility",3000,6,2023-04-11T15:00:00Z,2023-04-18T15:00:00Z
+149,"Cycling Helmet","Protective cycling helmet for safe and comfortable rides",8000,10,2023-04-19T17:00:00Z,2023-04-26T17:00:00Z
+150,"Digital Piano","Digital piano with weighted keys for realistic playing experience",40000,4,2023-04-10T08:00:00Z,2023-04-17T08:00:00Z
+151,"Wireless Earbuds","Wireless earbuds for music and calls on the go",10000,9,2023-04-12T12:00:00Z,2023-04-19T12:00:00Z
+152,"Home Theater Projector","High-definition home theater projector for immersive entertainment",60000,3,2023-04-09T10:00:00Z,2023-04-16T10:00:00Z
+153,"Jump Rope","Durable jump rope for cardio and fitness workouts",2000,7,2023-04-11T16:00:00Z,2023-04-18T16:00:00Z
+154,"Portable Hard Drive","Portable hard drive for secure data storage and backup",15000,2,2023-04-08T09:00:00Z,2023-04-15T09:00:00Z
+155,"Hiking Backpack","Spacious hiking backpack for outdoor adventures",25000,8,2023-04-14T14:00:00Z,2023-04-21T14:00:00Z
+156,"Wireless Gaming Mouse","Wireless gaming mouse with high precision and responsiveness",6000,5,2023-04-07T11:00:00Z,2023-04-14T11:00:00Z
+157,"Outdoor Grill Set","Complete outdoor grill set for delicious barbecue meals",35000,1,2023-04-15T13:00:00Z,2023-04-22T13:00:00Z
+158,"Bluetooth Car Kit","Bluetooth car kit for hands-free calling and music streaming",10000,6,2023-04-06T15:00:00Z,2023-04-13T15:00:00Z
+159,"Portable Air Cooler","Portable air cooler for staying cool in hot summer months",12000,10,2023-04-14T17:00:00Z,2023-04-21T17:00:00Z
+160,"Wireless Gaming Headset","Wireless gaming headset for immersive gaming audio",20000,4,2023-04-05T08:00:00Z,2023-04-12T08:00:00Z
+161,"Fitness Tracker","Smart fitness tracker for monitoring health and activity",15000,9,2023-04-07T12:00:00Z,2023-04-14T12:00:00Z
+162,"Home Security Camera","Indoor and outdoor home security camera for enhanced safety",45000,3,2023-04-04T10:00:00Z,2023-04-11T10:00:00Z
+163,"Yoga Ball","Sturdy yoga ball for core strengthening and balance exercises",5000,7,2023-04-06T16:00:00Z,2023-04-13T16:00:00Z
+164,"Portable Bluetooth Speaker","Compact and portable Bluetooth speaker for on-the-go music",8000,2,2023-04-03T09:00:00Z,2023-04-10T09:00:00Z
+165,"Camping Sleeping Bag","Warm and comfortable sleeping bag for camping trips",20000,8,2023-04-09T14:00:00Z,2023-04-16T14:00:00Z
+166,"Wireless Earphones","Wireless earphones for music and calls on the go",5000,5,2023-04-02T11:00:00Z,2023-04-09T11:00:00Z
+167,"Robotic Vacuum Cleaner","Intelligent robotic vacuum cleaner for automated cleaning",40000,1,2023-04-10T13:00:00Z,2023-04-17T13:00:00Z
+168,"Resistance Band Set","Set of resistance bands with varying resistance levels",5000,6,2023-04-01T15:00:00Z,2023-04-08T15:00:00Z
+169,"Hiking Shoes","Durable hiking shoes for comfortable and secure hikes",12000,10,2023-04-09T17:00:00Z,2023-04-16T17:00:00Z
+170,"Wireless Gaming Keyboard","Wireless gaming keyboard for responsive and precise gaming",20000,4,2023-03-31T08:00:00Z,2023-04-07T08:00:00Z
+171,"Smart Scale","Smart scale for monitoring weight and body composition",8000,9,2023-04-02T12:00:00Z,2023-04-09T12:00:00Z
+172,"Home Theater Soundbar","Powerful home theater soundbar for immersive audio",60000,3,2023-03-30T10:00:00Z,2023-04-06T10:00:00Z
+173,"Pilates Ring","Versatile Pilates ring for strengthening and toning exercises",3000,7,2023-04-01T16:00:00Z,2023-04-08T16:00:00Z
+174,"Wireless Charging Pad","Wireless charging pad for convenient device charging",6000,2,2023-03-29T09:00:00Z,2023-04-05T09:00:00Z
+175,"Camping Cookware Set","Compact and lightweight camping cookware set",15000,8,2023-03-31T14:00:00Z,2023-04-07T14:00:00Z
+176,"Bluetooth Sports Headphones","Bluetooth sports headphones for music and calls during workouts",6000,5,2023-03-28T11:00:00Z,2023-04-04T11:00:00Z
+177,"Smart Doorbell","Smart doorbell with video and two-way audio communication",10000,1,2023-04-05T13:00:00Z,2023-04-12T13:00:00Z
+178,"Travel Backpack","Versatile travel backpack for convenient and organized travel",25000,6,2023-03-27T15:00:00Z,2023-04-03T15:00:00Z
+179,"Cycling Gloves","Comfortable and protective cycling gloves for rides",5000,10,2023-04-04T17:00:00Z,2023-04-11T17:00:00Z
+180,"Digital Mixing Console","Professional digital mixing console for audio production",40000,4,2023-03-26T08:00:00Z,2023-04-02T08:00:00Z
+181,"Wireless Bluetooth Earbuds","Wireless Bluetooth earbuds for music and calls on the go",12000,9,2023-03-28T12:00:00Z,2023-04-04T12:00:00Z
+182,"Home Theater Receiver","Powerful home theater receiver for enhanced audio performance",50000,3,2023-03-25T10:00:00Z,2023-04-01T10:00:00Z
+183,"Yoga Strap","Durable and adjustable yoga strap for stretching and flexibility",3000,7,2023-03-27T16:00:00Z,2023-04-03T16:00:00Z
+184,"Wireless Charging Stand","Wireless charging stand for convenient device charging",6000,2,2023-03-24T09:00:00Z,2023-03-31T09:00:00Z
+185,"Camping Lantern","Portable and rechargeable camping lantern for outdoor lighting",10000,8,2023-03-30T14:00:00Z,2023-04-06T14:00:00Z
+186,"Gaming Keyboard","Gaming keyboard with customizable RGB lighting and programmable keys",15000,5,2023-03-23T11:00:00Z,2023-03-30T11:00:00Z
+187,"Robot Vacuum Cleaner","Automated robot vacuum cleaner for effortless cleaning",60000,1,2023-03-31T13:00:00Z,2023-04-07T13:00:00Z
+188,"Resistance Loop Bands","Set of resistance loop bands for strength training and mobility",5000,6,2023-03-22T15:00:00Z,2023-03-29T15:00:00Z
+189,"Cycling Shoes","High-performance cycling shoes for efficient power transfer",12000,10,2023-03-30T17:00:00Z,2023-04-06T17:00:00Z
+190,"Smart Home Hub","Central control hub for managing smart home devices",30000,4,2023-03-21T08:00:00Z,2023-03-28T08:00:00Z
+

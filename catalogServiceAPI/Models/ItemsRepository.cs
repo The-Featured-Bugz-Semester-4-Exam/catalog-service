@@ -6,8 +6,8 @@ using catalogServiceAPI.Controllers;
 
 namespace catalogServiceAPI.Models
 {
-	public class ItemsRepository : IItemsRepository
-	{
+    public class ItemsRepository : IItemsRepository
+    {
         public readonly IConfiguration _config;
 
         public readonly ILogger<ItemsRepository> _logger;
@@ -79,31 +79,60 @@ namespace catalogServiceAPI.Models
 
         public bool UpdateItem(int ID, Item updatedItem)
         {
+
+            _logger.LogInformation($"INFO: ID på item flagged til opdatering: {ID}");
+            var filter = Builders<Item>.Filter.Eq(i => i.ItemID, ID);
+            var existingItem = _context.Items.Find(filter).FirstOrDefault();
+
+            if (existingItem != null)
             {
-                _logger.LogInformation($"INFO: ID på item flagged til opdatering: {ID}");
-                var filter = Builders<Item>.Filter.Eq(i => i.ItemID, ID);
-                var existingItem = _context.Items.Find(filter).FirstOrDefault();
+                existingItem.ItemName = updatedItem.ItemName;
+                existingItem.ItemDescription = updatedItem.ItemDescription;
+                existingItem.ItemStartPrice = updatedItem.ItemStartPrice;
+                existingItem.ItemSellerID = updatedItem.ItemSellerID;
+                existingItem.ItemStartDate = updatedItem.ItemStartDate;
+                existingItem.ItemEndDate = updatedItem.ItemEndDate;
 
-                if (existingItem != null)
-                {
-                    existingItem.ItemName = updatedItem.ItemName;
-                    existingItem.ItemDescription = updatedItem.ItemDescription;
-                    existingItem.ItemStartPrice = updatedItem.ItemStartPrice;
-                    existingItem.ItemSellerID = updatedItem.ItemSellerID;
-                    existingItem.ItemStartDate = updatedItem.ItemStartDate;
-                    existingItem.ItemEndDate = updatedItem.ItemEndDate;
+                var result = _context.Items.ReplaceOne(filter, existingItem);
+                bool isUpdated = result.ModifiedCount > 0;
 
-                    var result = _context.Items.ReplaceOne(filter, existingItem);
-                    bool isUpdated = result.ModifiedCount > 0;
-
-                    return isUpdated;
-                }
-
-                else
-                {
-                    return false;
-                }
+                return isUpdated;
             }
+
+            else
+            {
+                return false;
+            }
+
+        }
+
+
+        //Metode til at fjerne items, der er blevet bortauktioneret
+
+        public void RemoveExpiredItems()
+        {
+            _logger.LogInformation("INFO: Metoden RemoveExpiredItems er kørt kl {DT}");
+
+            DateTime currentDT = DateTime.UtcNow;
+            DateTime nextMidnight = currentDT.Date.AddDays(1).AddHours(0);
+
+            TimeSpan timeUntilNextMidnight = nextMidnight - currentDT;
+
+            var expiredItems = _context.Items.Find(i => i.ItemEndDate < currentDT).ToList();
+
+            foreach (var item in expiredItems)
+            {
+                _context.Items.DeleteOne(i => i.ItemID == item.ItemID)
+            }
+        }
+
+
+        //Metode til at styre cleanup af udløbne items 
+
+        public void ScheduledTimer()
+        {
+            //Timer der kører metoden en gang om dagen
+            Timer timer = new Timer(RemoveExpiredItems, null, TimeSpan.Zero, TimeSpan.FromHours(24))
         }
     }
 }
