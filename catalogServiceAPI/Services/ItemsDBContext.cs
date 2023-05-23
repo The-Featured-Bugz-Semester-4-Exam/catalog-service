@@ -2,8 +2,9 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 using catalogServiceAPI.Controllers;
+using catalogServiceAPI.Models;
 
-namespace catalogServiceAPI.Models
+namespace catalogServiceAPI.Services
 {
     public class ItemsDBContext
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using catalogServiceAPI.Models;
 
-namespace catalogServiceAPI.Models
+namespace catalogServiceAPI.Services
 {
 	public interface IItemsRepository
 	{
@@ -10,9 +10,7 @@ namespace catalogServiceAPI.Models
         void PostItem(Item item);
         bool UpdateItem(int ItemID, Item item);
         bool DeleteItem(int ItemID);
-        void RemoveExpiredItems();
-
-        void PostItemToAuction(int ItemID);
+        List<Item> PostItemToAuction();
     }
 }
 

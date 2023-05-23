@@ -6,7 +6,7 @@
           The Featured Bugz
       </Company>
       <FileVersion>
-          0.3.0
+          0.4.0
       </FileVersion>
       <Description>
           0.1.0: første version af catalog-service, indholder forbindelse til MongoDB samt metode 'GetAllItems'
@@ -28,6 +28,17 @@
                  alle metoder er testet og virker stadig
           0.3.0: Lavede metoderne 'ScheduledTimer' og 'RemoveExpiredItems' (ikke testet endnu)
                  Tilføjede tekst-doc med data i CSV-format som passer til DB'en
+          0.4.0: Ændrede mange ting
+                        Stort:
+                    Ændrede i DB-collectionen, da data ikke passede i format
+                    Tilføjede field 'ItemCurrentBid' til klassen item
+                    Tilføjede metode 'PostItemToAuction'
+                    Fjernede metode 'RemoveExpiredItems'
+                    Arbejdet på Timer-funktion 'ScheduledTimer' - virker stadig ikke
+                        Småt:
+                    Oprettede hjælpeklassen 'ItemToAuction'
+                    Ændrede medtode forhold til opbevaring af connectionstring
+                    opdaterede metoder tilgængelige i 'IItemsRepository'
                  
       </Description>
 
@@ -44,6 +55,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="MongoDB.Bson" Version="2.19.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.19.1" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>

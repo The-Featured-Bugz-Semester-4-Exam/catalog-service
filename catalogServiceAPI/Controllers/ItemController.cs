@@ -1,4 +1,5 @@
 ﻿using catalogServiceAPI.Models;
+using catalogServiceAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using MongoDB.Bson;
@@ -188,34 +189,45 @@ public class ItemController : ControllerBase
 
 
     //Metode til at Sende et item til AuctionService
-    [HttpPost("PostItemToAuction/{id}")]
+    [HttpPost("NewAuctions")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
 
-    public IActionResult PostItemToAuction(int iD)
+    public IActionResult PostItemToAuction(List<Item> items)
     {
         try
         {
             _logger.LogInformation("INFO: Metode PostItemToAuction kaldt {DT} på Item med ID {ID}" +
             DateTime.UtcNow.ToLongTimeString());
 
-            var item = _repository.GetItemOnID(iD);
+            //opretter en liste kaldet 'auctions'
+            List<ItemToAuction> auctions = new List<ItemToAuction>();
 
-            //string json = JsonConvert.SerializeObject(item);
-            //var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
-            //HttpResponseMessage response = await _httpClient.PostAsync($"{_auctionServiceUrl}/items", content);
+            var list = _repository.PostItemToAuction();
 
-            //response.EnsureSuccessStatusCode();
-            return Ok(item);
-            //Console.WriteLine("Item successfully pushed to the Auction service.");
+            //Hvis listen er tom
+            if (list == null)
+            {
+                _logger.LogInformation("INFO: Listen er tom");
+                return StatusCode(StatusCodes.Status204NoContent);
+            }
+            _logger.LogInformation($"INFO: Indhold af variabel list: {list}");
 
+            //Loop der sætter 'auction' instanser ind i 'auctions'-listen
+            foreach (Item item in list)
+            {
+                // Konverterer hvert 'Item' i list til det nye 'ItemToAuction' format
+                ItemToAuction auction = new ItemToAuction(item);
+                auctions.Add(auction);
+            }
 
+            return Ok(auctions);
         }
+        //hvis andre fejl
         catch (HttpRequestException ex)
         {
             _logger.LogInformation("FEJL: Metode PostItemToAuction kaldt {DT}, det gik galt" + ex,
-            DateTime.UtcNow.ToLongTimeString(), iD);
+            DateTime.UtcNow.ToLongTimeString());
         }
-        return Ok();
         return StatusCode(StatusCodes.Status402PaymentRequired);
     }
 }
