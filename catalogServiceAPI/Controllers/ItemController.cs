@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using System.Linq;
+using System;
+using System.Net.Http;
 
 namespace catalogServiceAPI.Controllers;
 
@@ -10,6 +12,8 @@ namespace catalogServiceAPI.Controllers;
 [Route("[controller]")]
 public class ItemController : ControllerBase
 {
+    private readonly HttpClient _httpClient = new HttpClient();
+
     private readonly ILogger<ItemController> _logger;
 
     private readonly IItemsRepository _repository;
@@ -149,6 +153,29 @@ public class ItemController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogInformation("FEJL: Metode DeleteItem kaldt {DT}, det gik galt" + ex,
+            DateTime.UtcNow.ToLongTimeString());
+
+            return StatusCode(StatusCodes.Status418ImATeapot);
+        }
+    }
+
+
+    //Metode til at Sende et item til AuctionService
+
+    [HttpPost("PostAuction")]
+    [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
+    public IActionResult PostAuction(int ID)
+    {
+        try
+        {
+            _logger.LogInformation("INFO: Metode PostAuction kaldt {DT} på Item med ID {ID}" +
+            DateTime.UtcNow.ToLongTimeString());
+
+            var item = _repository.GetItemOnID(ID);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogInformation("FEJL: Metode PostAuction kaldt {DT}, det gik galt" + ex,
             DateTime.UtcNow.ToLongTimeString());
 
             return StatusCode(StatusCodes.Status418ImATeapot);

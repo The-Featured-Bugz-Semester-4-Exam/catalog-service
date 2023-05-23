@@ -107,7 +107,19 @@ namespace catalogServiceAPI.Models
         }
 
 
-        //Metode til at fjerne items, der er blevet bortauktioneret
+        //Metode til at sende items til BidService, til at oprette auktioner
+
+        public void SendItemsToAuction()
+        {
+            _logger.LogInformation("INFO: Metoden SendItemsToAuction er kørt kl {DT");
+
+            DateTime currentDT = DateTime.UtcNow;
+
+            var ItemsToSend = _context.Items.Find(i => i.ItemStartDate < currentDT).ToList();
+        }
+
+
+        //Metode til at fjerne items, der har været på auktion
 
         public void RemoveExpiredItems()
         {

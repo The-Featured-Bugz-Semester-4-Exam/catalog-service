@@ -34,7 +34,7 @@ using System.Reflection;
                  Tilføjede tekst-doc med data i CSV-format som passer til DB'en
                  
       ")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("\n          0.2.1\n      ")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("\n          0.3.0\n      ")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("catalogServiceAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("catalogServiceAPI")]
