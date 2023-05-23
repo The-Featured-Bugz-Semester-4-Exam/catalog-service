@@ -5,11 +5,13 @@ using MongoDB.Bson;
 using System.Linq;
 using System;
 using System.Net.Http;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace catalogServiceAPI.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api")]
 public class ItemController : ControllerBase
 {
     private readonly HttpClient _httpClient = new HttpClient();
@@ -180,5 +182,40 @@ public class ItemController : ControllerBase
 
             return StatusCode(StatusCodes.Status418ImATeapot);
         }
+       
+        return Ok();
+    }
+
+
+    //Metode til at Sende et item til AuctionService
+    [HttpPost("PostItemToAuction/{id}")]
+    [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
+
+    public IActionResult PostItemToAuction(int iD)
+    {
+        try
+        {
+            _logger.LogInformation("INFO: Metode PostItemToAuction kaldt {DT} på Item med ID {ID}" +
+            DateTime.UtcNow.ToLongTimeString());
+
+            var item = _repository.GetItemOnID(iD);
+
+            //string json = JsonConvert.SerializeObject(item);
+            //var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+            //HttpResponseMessage response = await _httpClient.PostAsync($"{_auctionServiceUrl}/items", content);
+
+            //response.EnsureSuccessStatusCode();
+            return Ok(item);
+            //Console.WriteLine("Item successfully pushed to the Auction service.");
+
+
+        }
+        catch (HttpRequestException ex)
+        {
+            _logger.LogInformation("FEJL: Metode PostItemToAuction kaldt {DT}, det gik galt" + ex,
+            DateTime.UtcNow.ToLongTimeString(), iD);
+        }
+        return Ok();
+        return StatusCode(StatusCodes.Status402PaymentRequired);
     }
 }

@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/madsbaggelarsen/Desktop/eksamen/Kode/catalogservice/catalog-service/catalogServiceAPI/catalogServiceAPI.csproj": {}
+    "C:\\Users\\jonat\\Desktop\\The-Featured-Bugz-Semester-4-Exam\\catalog-service\\catalogServiceAPI\\catalogServiceAPI.csproj": {}
   },
   "projects": {
-    "/Users/madsbaggelarsen/Desktop/eksamen/Kode/catalogservice/catalog-service/catalogServiceAPI/catalogServiceAPI.csproj": {
+    "C:\\Users\\jonat\\Desktop\\The-Featured-Bugz-Semester-4-Exam\\catalog-service\\catalogServiceAPI\\catalogServiceAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/madsbaggelarsen/Desktop/eksamen/Kode/catalogservice/catalog-service/catalogServiceAPI/catalogServiceAPI.csproj",
+        "projectUniqueName": "C:\\Users\\jonat\\Desktop\\The-Featured-Bugz-Semester-4-Exam\\catalog-service\\catalogServiceAPI\\catalogServiceAPI.csproj",
         "projectName": "catalogServiceAPI",
-        "projectPath": "/Users/madsbaggelarsen/Desktop/eksamen/Kode/catalogservice/catalog-service/catalogServiceAPI/catalogServiceAPI.csproj",
-        "packagesPath": "/Users/madsbaggelarsen/.nuget/packages/",
-        "outputPath": "/Users/madsbaggelarsen/Desktop/eksamen/Kode/catalogservice/catalog-service/catalogServiceAPI/obj/",
+        "projectPath": "C:\\Users\\jonat\\Desktop\\The-Featured-Bugz-Semester-4-Exam\\catalog-service\\catalogServiceAPI\\catalogServiceAPI.csproj",
+        "packagesPath": "C:\\Users\\jonat\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jonat\\Desktop\\The-Featured-Bugz-Semester-4-Exam\\catalog-service\\catalogServiceAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/madsbaggelarsen/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\jonat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -50,6 +52,10 @@
               "target": "Package",
               "version": "[2.19.1, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
@@ -74,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

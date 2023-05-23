@@ -109,7 +109,7 @@ namespace catalogServiceAPI.Models
 
         //Metode til at sende items til BidService, til at oprette auktioner
 
-        public void SendItemsToAuction()
+        public void PostItemToAuction(int ItemID)
         {
             _logger.LogInformation("INFO: Metoden SendItemsToAuction er kørt kl {DT");
 
@@ -134,18 +134,20 @@ namespace catalogServiceAPI.Models
 
             foreach (var item in expiredItems)
             {
-                _context.Items.DeleteOne(i => i.ItemID == item.ItemID)
+                _context.Items.DeleteOne(i => i.ItemID == item.ItemID);
             }
         }
 
 
         //Metode til at styre cleanup af udløbne items 
 
+        /*
         public void ScheduledTimer()
         {
             //Timer der kører metoden en gang om dagen
             Timer timer = new Timer(RemoveExpiredItems, null, TimeSpan.Zero, TimeSpan.FromHours(24))
         }
+        */
     }
 }
 
