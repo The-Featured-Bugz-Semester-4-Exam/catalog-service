@@ -34,8 +34,9 @@ using System.Reflection;
     "på Timer-funktion \'ScheduledTimer\' - virker stadig ikke\n                        " +
     "Småt:\n                    Oprettede hjælpeklassen \'ItemToAuction\'\n              " +
     "      Ændrede medtode forhold til opbevaring af connectionstring\n               " +
-    "     opdaterede metoder tilgængelige i \'IItemsRepository\'\n                 \n    " +
-    "  ")]
+    "     opdaterede metoder tilgængelige i \'IItemsRepository\'\n          0.5.0: tilfø" +
+    "jdede httpPost-metode til at sende liste med ItemsToAuctions til AuctionService\n" +
+    "                 \n      ")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("\n          0.4.0\n      ")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("catalogServiceAPI")]

@@ -21,7 +21,8 @@ namespace catalogServiceAPI.Models
         public int ItemSellerID { get; set; }
         public DateTime ItemStartDate { get; set; }
         public DateTime ItemEndDate { get; set; }
-
+        // public int ItemCategory { get; set; }
+        // public int ItemCalatog { get; set; }
 
         //Nice to have, billeder.
         //public int ItemPictureID { get; set; }
