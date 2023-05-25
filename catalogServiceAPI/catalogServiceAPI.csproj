@@ -6,7 +6,7 @@
           The Featured Bugz
       </Company>
       <FileVersion>
-          0.5.3
+          0.6.0
       </FileVersion>
       <Description>
           0.1.0: første version af catalog-service, indholder forbindelse til MongoDB samt metode 'GetAllItems'
@@ -45,6 +45,8 @@
           0.5.3: aktiverede metode 'PostItemsToAuction'
                     Den giver ingen fejl, men det vides ikke om den virker
                     Der mangler data til at teste!!
+          0.6.0: Ændrede lidt i filopsætningen
+                    Lavede et 'ItemToAuctionRepository' klasse med dertilhørende interface
                  
       </Description>
 
