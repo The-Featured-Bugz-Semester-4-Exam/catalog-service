@@ -203,7 +203,8 @@ public class ItemController : ControllerBase
             //opretter en liste kaldet 'auctions'
             List<ItemToAuction> auctions = new List<ItemToAuction>();
 
-            var list = _repository.PostItemToAuction();
+            var list = _repository.GetAllItems();
+                //PostItemToAuction();
 
             //Hvis listen er tom
             if (list == null)
