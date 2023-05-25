@@ -11,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IItemsRepository, ItemsRepository>();
+builder.Services.AddSingleton<IItemToAuctionRepository, ItemToAuctionRepository>();
 
 var app = builder.Build();
 

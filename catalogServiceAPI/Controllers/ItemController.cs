@@ -243,8 +243,8 @@ public class ItemController : ControllerBase
 
         using (var httpClient = new HttpClient())
         {
-            var response = await httpClient.PostAsync($"{config[connAuk]}" / api / PostAuctions", content);
-            _logger.LogInformation($"INFO: env til auction-service: {config[connAuk]}");
+            var response = await httpClient.PostAsync($"{_config["connAuk"]}/api/PostAuctions", content);
+            _logger.LogInformation($"INFO: env til auction-service: {_config["connAuk"]}");
 
             if (response.IsSuccessStatusCode)
             {

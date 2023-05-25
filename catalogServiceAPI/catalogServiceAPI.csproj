@@ -48,6 +48,7 @@
           0.6.0: Ændrede lidt i filopsætningen
                     Lavede et 'ItemToAuctionRepository' klasse med dertilhørende interface
           0.6.1: Tilføjede til metode til at kunne poste til auction-service
+          0.6.2: Flere små ændringer
                  
       </Description>
 
