@@ -5,7 +5,7 @@ namespace catalogServiceAPI.Services
 {
 	public interface IItemToAuctionRepository
 	{
-        []<ItemToAuction> PostItemToAuction();
+        ItemToAuction[] PostItemToAuction();
     }
 }
 
