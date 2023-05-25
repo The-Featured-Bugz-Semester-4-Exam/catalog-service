@@ -7,6 +7,7 @@ using catalogServiceAPI.Models;
 using System.Text;
 using System.Threading.Channels;
 using MongoDB.Driver.Core.Bindings;
+using System.Timers;
 
 namespace catalogServiceAPI.Services
 {
@@ -114,30 +115,56 @@ namespace catalogServiceAPI.Services
         }
 
 
-        //Metode til at sende items til BidService, til at oprette auktioner
+        //Metode til at sende items til AuctionService, til at oprette auktioner
 
-        public List<Item> PostItemToAuction()
+        public List<ItemToAuction> PostItemToAuction()
         {
             _logger.LogInformation("INFO: Metoden SendItemsToAuction er kørt kl {DT");
 
             DateTime currentDT = DateTime.UtcNow;
 
-            var list = _collection.Find(i => i.ItemStartDate < currentDT).ToList();
+            var itemList = _collection.Find(i => i.ItemStartDate < currentDT).ToList();
+            var itemToAuctionList = new List<ItemToAuction>();
 
-            _logger.LogInformation($"INFO: Indhold af variabel 'list': {list}");
+            foreach (var item in itemList)
+            {
+                var itemToAuction = new ItemToAuction(item);
+                itemToAuctionList.Add(itemToAuction);
+            }
 
-            return list;
+            _logger.LogInformation($"INFO: Indhold af variabel 'list': {string.Join(", ", itemToAuctionList)}");
+
+            return itemToAuctionList;
         }
 
 
         //Metode til at styre cleanup af udløbne items 
+        /*
+        private static System.Timers.Timer timer;
 
-        
         public void ScheduledTimer()
         {
-            //Timer der kører metoden en gang om dagen
-            Timer timer = new Timer(PostItemToAuction, null, TimeSpan.Zero, TimeSpan.FromHours(24));
+            //Timer der kører metoden en gang pr 12 time (ms * s * m * t)
+            int intervalInMilliseconds = 1000 * 60 * 60 * 12;
+            DateTime now = DateTime.Now;
+
+            timer = new System.Timers.Timer(interval);
+
+            timer.Elapsed += TimerElapsed();
+
+            timer.Start();
+
+            _logger.LogInformation($"timer startet: {now} - tid til næste interval: {intervalInMilliseconds}");
         }
+
+        private static void TimerElapsed()
+        {
+
+        }
+        */
+
+        //Post
+
     }
 }
 

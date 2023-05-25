@@ -7,6 +7,7 @@ using System.Linq;
 using System;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace catalogServiceAPI.Controllers;
@@ -229,5 +230,24 @@ public class ItemController : ControllerBase
             DateTime.UtcNow.ToLongTimeString());
         }
         return StatusCode(StatusCodes.Status402PaymentRequired);
+    }
+
+    public async Task SendItemsToAuction(List<ItemToAuction> itemToAuctionList)
+    {
+        var json = JsonConvert.SerializeObject(itemToAuctionList);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        using (var httpClient = new HttpClient())
+        {
+            var response = await httpClient.PostAsync("http://localhost/api/PostAuctions", content);
+            if (response.IsSuccessStatusCode)
+            {
+                _logger.LogInformation("Items successfully sent to the auction service.");
+            }
+            else
+            {
+                _logger.LogError("Failed to send items to the auction service.");
+            }
+        }
     }
 }

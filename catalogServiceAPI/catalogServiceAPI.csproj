@@ -39,6 +39,7 @@
                     Oprettede hjælpeklassen 'ItemToAuction'
                     Ændrede medtode forhold til opbevaring af connectionstring
                     opdaterede metoder tilgængelige i 'IItemsRepository'
+          0.5.0: tilføjdede httpPost-metode til at sende liste med ItemsToAuctions til AuctionService
                  
       </Description>
 
