@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IItemsRepository, ItemsNowRepository>();
+builder.Services.AddSingleton<IItemsRepository, ItemsRepository>();
 
 var app = builder.Build();
 

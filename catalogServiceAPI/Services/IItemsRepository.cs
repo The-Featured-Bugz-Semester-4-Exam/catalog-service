@@ -10,7 +10,7 @@ namespace catalogServiceAPI.Services
         void PostItem(Item item);
         bool UpdateItem(int ItemID, Item item);
         bool DeleteItem(int ItemID);
-        List<Item> PostItemToAuction();
+        //List<Item> PostItemToAuction();
     }
 }
 

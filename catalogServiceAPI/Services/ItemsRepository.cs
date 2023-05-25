@@ -17,19 +17,16 @@ namespace catalogServiceAPI.Services
 
         public readonly ILogger<ItemsRepository> _logger;
 
-        private readonly ItemsDBContext _context;
-
         private readonly IMongoCollection<Item> _collection;
 
         public ItemsRepository(ILogger<ItemsRepository> logger, IConfiguration config)
         {
             _logger = logger;
             _config = config;
-            _context = new ItemsDBContext(config);
             _logger.LogInformation($"INFO: connecitonstring er: {config["connectionString"]} ");
             var mongoClient = new MongoClient(_config["connectionString"]);
             var database = mongoClient.GetDatabase(_config["database"]);
-            _collection = database.GetCollection<Item>(_config["Items"]);
+            _collection = database.GetCollection<Item>(_config["collection"]);
         }
 
 
@@ -139,7 +136,7 @@ namespace catalogServiceAPI.Services
 
 
         //Metode til at styre cleanup af udløbne items 
-        /*
+        
         private static System.Timers.Timer timer;
 
         public void ScheduledTimer()
@@ -148,20 +145,20 @@ namespace catalogServiceAPI.Services
             int intervalInMilliseconds = 1000 * 60 * 60 * 12;
             DateTime now = DateTime.Now;
 
-            timer = new System.Timers.Timer(interval);
+            timer = new System.Timers.Timer(intervalInMilliseconds);
 
-            timer.Elapsed += TimerElapsed();
+            //timer.Elapsed += TimerElapsed();
 
             timer.Start();
 
             _logger.LogInformation($"timer startet: {now} - tid til næste interval: {intervalInMilliseconds}");
         }
 
-        private static void TimerElapsed()
+        /*private static void TimerElapsed()
         {
 
-        }
-        */
+        }*/
+        
 
         //Post
 
