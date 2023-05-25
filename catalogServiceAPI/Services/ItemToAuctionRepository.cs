@@ -41,7 +41,7 @@ namespace catalogServiceAPI.Services
 
             _logger.LogInformation($"INFO: Indhold af variabel 'list': {string.Join(", ", itemToAuctionList)}");
 
-            return itemToAuctionList;
+            return itemToAuctionList.ToArray();
         }
 
 

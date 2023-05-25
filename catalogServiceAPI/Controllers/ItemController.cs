@@ -18,12 +18,15 @@ public class ItemController : ControllerBase
 {
     private readonly HttpClient _httpClient = new HttpClient();
 
+    public readonly IConfiguration _config;
+
     private readonly ILogger<ItemController> _logger;
 
     private readonly IItemsRepository _repository;
 
-    public ItemController(ILogger<ItemController> logger, IItemsRepository repository)
+    public ItemController(IConfiguration config, ILogger<ItemController> logger, IItemsRepository repository)
     {
+        _config = config;
         _logger = logger;
         _repository = repository;
     }
@@ -222,7 +225,7 @@ public class ItemController : ControllerBase
                 auctions.Add(auction);
             }
 
-            return Ok(auctions);
+            return Ok(auctions.ToArray);
         }
         //hvis andre fejl
         catch (HttpRequestException ex)
@@ -240,7 +243,9 @@ public class ItemController : ControllerBase
 
         using (var httpClient = new HttpClient())
         {
-            var response = await httpClient.PostAsync("http://localhost/api/PostAuctions", content);
+            var response = await httpClient.PostAsync($"{config[connAuk]}" / api / PostAuctions", content);
+            _logger.LogInformation($"INFO: env til auction-service: {config[connAuk]}");
+
             if (response.IsSuccessStatusCode)
             {
                 _logger.LogInformation("Items successfully sent to the auction service.");

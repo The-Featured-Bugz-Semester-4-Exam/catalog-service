@@ -23,7 +23,7 @@ namespace catalogServiceAPI.Services
         {
             _logger = logger;
             _config = config;
-            _logger.LogInformation($"INFO: connecitonstring er: {config["connectionString"]} ");
+            _logger.LogInformation($"INFO: connecitonstring er: {config["connectionString"]}");
             var mongoClient = new MongoClient(_config["connectionString"]);
             var database = mongoClient.GetDatabase(_config["database"]);
             _collection = database.GetCollection<Item>(_config["collection"]);
