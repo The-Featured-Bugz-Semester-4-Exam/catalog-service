@@ -233,7 +233,7 @@ public class ItemController : ControllerBase
         return StatusCode(StatusCodes.Status402PaymentRequired);
     }
 
-    public async Task SendItemsToAuction(List<ItemToAuction> itemToAuctionList)
+    public async Task PostItemsToAuction(List<ItemToAuction> itemToAuctionList)
     {
         var json = JsonConvert.SerializeObject(itemToAuctionList);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
