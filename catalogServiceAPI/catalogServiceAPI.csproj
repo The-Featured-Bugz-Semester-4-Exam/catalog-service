@@ -6,7 +6,7 @@
           The Featured Bugz
       </Company>
       <FileVersion>
-          0.6.1
+          0.6.3
       </FileVersion>
       <Description>
           0.1.0: første version af catalog-service, indholder forbindelse til MongoDB samt metode 'GetAllItems'
@@ -49,6 +49,7 @@
                     Lavede et 'ItemToAuctionRepository' klasse med dertilhørende interface
           0.6.1: Tilføjede til metode til at kunne poste til auction-service
           0.6.2: Flere små ændringer
+          0.6.3: Tilføjede metode 'GetPrice' og opdaterede metode 'PostAuction'
                  
       </Description>
 

@@ -34,7 +34,7 @@ public class ItemController : ControllerBase
 
     //Metode til at få alle Items ud af ItemsDB'en
 
-    [HttpGet("Get/All")]
+    [HttpGet("get/all")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
     public IActionResult GetAllItems()
     {
@@ -59,7 +59,7 @@ public class ItemController : ControllerBase
 
     //Metode til at få et specifikt Item ud af ItemsDB'en
 
-    [HttpGet("Get/{ID}")]
+    [HttpGet("get/{ID}")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
     public IActionResult GetItemOnID(int ID)
     {
@@ -84,7 +84,7 @@ public class ItemController : ControllerBase
 
     //Metode til at oprette et item i cataloget
 
-    [HttpPost("PostItem")]
+    [HttpPost("postItem")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
     public IActionResult PostItem([FromBody] Item item)
     {
@@ -169,7 +169,7 @@ public class ItemController : ControllerBase
 
     //Metode til at Sende et item til AuctionService
 
-    [HttpPost("PostAuction")]
+    [HttpPost("postAuction")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
     public IActionResult PostAuction(int ID)
     {
@@ -193,7 +193,7 @@ public class ItemController : ControllerBase
 
 
     //Metode til at Sende et item til AuctionService
-    [HttpPost("NewAuctions")]
+    [HttpPost("newAuctions")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
 
     public IActionResult PostItemToAuction(List<Item> items)
@@ -236,23 +236,51 @@ public class ItemController : ControllerBase
         return StatusCode(StatusCodes.Status402PaymentRequired);
     }
 
-    public async Task PostItemsToAuction(List<ItemToAuction> itemToAuctionList)
+    public async Task<IActionResult> PostItemsToAuction(List<ItemToAuction> itemToAuctionList)
     {
         var json = JsonConvert.SerializeObject(itemToAuctionList);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
 
         using (var httpClient = new HttpClient())
         {
-            var response = await httpClient.PostAsync($"{_config["connAuk"]}/api/PostAuctions", content);
+            var response = await httpClient.PostAsync($"{_config["connAuk"]}/api/postAuctions", content);
             _logger.LogInformation($"INFO: env til auction-service: {_config["connAuk"]}");
 
             if (response.IsSuccessStatusCode)
             {
-                _logger.LogInformation("Items successfully sent to the auction service.");
+                _logger.LogInformation("SUCCES: Items successfully sent to the auction service.");
+                return Ok();
             }
             else
             {
-                _logger.LogError("Failed to send items to the auction service.");
+                _logger.LogError("FEJL: Failed to send items to the auction service.");
+                return NotFound();
+            }
+        }
+    }
+
+
+    //Metode til at hente en pris
+    [HttpGet("getPrice/{id}")]
+    public async Task<IActionResult> GetAuctionPrice(int id)
+    {
+        using (var httpClient = new HttpClient())
+        {
+            var response = await httpClient.GetAsync($"{_config["connAuk"]}/api/getAuctionPrice/{id}");
+            string responseContent = await response.Content.ReadAsStringAsync();
+            int price = Convert.ToInt16(responseContent);
+
+            _logger.LogInformation($"INFO: env til auction-service: {_config["connAuk"]}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                _logger.LogInformation("SUCCES: Price successfully sent from the auction service.");
+                return Ok(price);
+            }
+            else
+            {
+                _logger.LogError("FEJL: Failed to get price from the auction service.");
+                return NotFound();
             }
         }
     }

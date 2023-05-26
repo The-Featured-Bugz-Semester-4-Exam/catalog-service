@@ -41,8 +41,12 @@ namespace catalogServiceAPI.Services
 
             _logger.LogInformation($"INFO: Indhold af variabel 'list': {string.Join(", ", itemToAuctionList)}");
 
-            return itemToAuctionList.ToArray();
+            return itemToAuctionList;
         }
+
+
+        //
+
 
 
         //Metode til at styre cleanup af udløbne items 
