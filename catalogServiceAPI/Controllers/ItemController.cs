@@ -34,7 +34,7 @@ public class ItemController : ControllerBase
 
     //Metode til at få alle Items ud af ItemsDB'en
 
-    [HttpGet("get/all")]
+    [HttpGet("getAllItems")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
     public IActionResult GetAllItems()
     {
@@ -59,16 +59,16 @@ public class ItemController : ControllerBase
 
     //Metode til at få et specifikt Item ud af ItemsDB'en
 
-    [HttpGet("get/{ID}")]
+    [HttpGet("getItem/{id}")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
-    public IActionResult GetItemOnID(int ID)
+    public IActionResult GetItemOnID(int id)
     {
         try
         {
             _logger.LogInformation("INFO: Metode GetItemOnID kaldt {DT}",
             DateTime.UtcNow.ToLongTimeString());
 
-            var item = _repository.GetItemOnID(ID);
+            var item = _repository.GetItemOnID(id);
 
             return Ok(item);
         }
@@ -109,16 +109,16 @@ public class ItemController : ControllerBase
 
     //Metode til at delete et item
 
-    [HttpDelete("delete/{ID}")]
+    [HttpDelete("deleteItem/{id}")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
-    public IActionResult DeleteItem(int ID)
+    public IActionResult DeleteItem(int id)
     {
         try
         {
             _logger.LogInformation("INFO: Metode DeleteItem kaldt {DT} på Item med ID {ID}" +
             DateTime.UtcNow.ToLongTimeString());
 
-            var item = _repository.DeleteItem(ID);
+            var item = _repository.DeleteItem(id);
 
             return Ok();
         }
@@ -134,26 +134,26 @@ public class ItemController : ControllerBase
 
     //Metode til at update et item
 
-    [HttpPut("update/{ID}")]
+    [HttpPut("updateItem/{id}")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
-    public IActionResult UpdateItem(int ID, Item item)
+    public IActionResult UpdateItem(int id,[FromBody] Item item)
     {
         try
         {
             _logger.LogInformation("INFO: Metode DeleteItem kaldt {DT} på Item med ID {ID}" +
             DateTime.UtcNow.ToLongTimeString());
 
-            bool isUpdated = _repository.UpdateItem(ID, item);
+            bool isUpdated = _repository.UpdateItem(id, item);
 
             if (isUpdated == true)
             {
-                _logger.LogInformation($"SUCCES: item med ID {ID} blev modificeret");
+                _logger.LogInformation($"SUCCES: item med ID {id} blev modificeret");
                 return Ok();
             }
 
             else
             {
-                _logger.LogInformation($"FEJL: item med ID {ID} blev ikke modificeret");
+                _logger.LogInformation($"FEJL: item med ID {id} blev ikke modificeret");
                 return StatusCode(StatusCodes.Status304NotModified);
             }
         }
@@ -169,16 +169,16 @@ public class ItemController : ControllerBase
 
     //Metode til at Sende et item til AuctionService
 
-    [HttpPost("postAuction")]
+    [HttpPost("postAuction/{id}")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
-    public IActionResult PostAuction(int ID)
+    public IActionResult PostAuction(int id)
     {
         try
         {
             _logger.LogInformation("INFO: Metode PostAuction kaldt {DT} på Item med ID {ID}" +
             DateTime.UtcNow.ToLongTimeString());
 
-            var item = _repository.GetItemOnID(ID);
+            var item = _repository.GetItemOnID(id);
         }
         catch (Exception ex)
         {
@@ -191,7 +191,7 @@ public class ItemController : ControllerBase
         return Ok();
     }
 
-
+/*
     //Metode til at Sende et item til AuctionService
     [HttpPost("newAuctions")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
@@ -225,7 +225,7 @@ public class ItemController : ControllerBase
                 auctions.Add(auction);
             }
 
-            return Ok(auctions.ToArray);
+            return Ok();
         }
         //hvis andre fejl
         catch (HttpRequestException ex)
@@ -234,9 +234,10 @@ public class ItemController : ControllerBase
             DateTime.UtcNow.ToLongTimeString());
         }
         return StatusCode(StatusCodes.Status402PaymentRequired);
-    }
+    }*/
 
-    public async Task<IActionResult> PostItemsToAuction(List<ItemToAuction> itemToAuctionList)
+    [HttpPost("postItemsToAuction")]
+    public async Task<IActionResult> PostItemsToAuction([FromBody] ItemToAuction[] itemToAuctionList)
     {
         var json = JsonConvert.SerializeObject(itemToAuctionList);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -261,7 +262,7 @@ public class ItemController : ControllerBase
 
 
     //Metode til at hente en pris
-    [HttpGet("getPrice/{id}")]
+    [HttpGet("getAuctionPrice/{id}")]
     public async Task<IActionResult> GetAuctionPrice(int id)
     {
         using (var httpClient = new HttpClient())
@@ -279,7 +280,7 @@ public class ItemController : ControllerBase
             }
             else
             {
-                _logger.LogError("FEJL: Failed to get price from the auction service.");
+                _logger.LogError("FEJL: Failed to get price from the auction service. ");
                 return NotFound();
             }
         }

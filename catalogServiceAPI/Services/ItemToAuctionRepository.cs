@@ -4,7 +4,7 @@ using MongoDB.Driver;
 
 namespace catalogServiceAPI.Services
 {
-	public class ItemToAuctionRepository
+	public class ItemToAuctionRepository : IItemToAuctionRepository
 	{
         public readonly IConfiguration _config;
 
@@ -66,6 +66,11 @@ namespace catalogServiceAPI.Services
             timer.Start();
 
             _logger.LogInformation($"timer startet: {now} - tid til næste interval: {intervalInMilliseconds}");
+        }
+
+        ItemToAuction[] IItemToAuctionRepository.PostItemToAuction()
+        {
+            throw new NotImplementedException();
         }
 
         /*private static void TimerElapsed()
