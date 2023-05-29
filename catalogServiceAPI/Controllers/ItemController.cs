@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-
+using System.ComponentModel;
 namespace catalogServiceAPI.Controllers;
 
 [ApiController]
@@ -30,6 +30,22 @@ public class ItemController : ControllerBase
         _logger = logger;
         _repository = repository;
     }
+
+
+
+
+    [HttpGet("getVersion")]
+    public IEnumerable<string> GetVersion()
+    {
+        var properties = new List<string>();
+        var assembly = typeof(Program).Assembly;
+        foreach (var attribute in assembly.GetCustomAttributesData())
+        {
+            properties.Add($"{attribute.AttributeType.Name} - {attribute.ToString()} \n");
+        }
+        return properties;
+    }
+
 
 
     //Metode til at få alle Items ud af ItemsDB'en
@@ -136,7 +152,7 @@ public class ItemController : ControllerBase
 
     [HttpPut("updateItem/{id}")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
-    public IActionResult UpdateItem(int id,[FromBody] Item item)
+    public IActionResult UpdateItem(int id, [FromBody] Item item)
     {
         try
         {
@@ -187,54 +203,9 @@ public class ItemController : ControllerBase
 
             return StatusCode(StatusCodes.Status418ImATeapot);
         }
-       
+
         return Ok();
     }
-
-/*
-    //Metode til at Sende et item til AuctionService
-    [HttpPost("newAuctions")]
-    [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
-
-    public IActionResult PostItemToAuction(List<Item> items)
-    {
-        try
-        {
-            _logger.LogInformation("INFO: Metode PostItemToAuction kaldt {DT} på Item med ID {ID}" +
-            DateTime.UtcNow.ToLongTimeString());
-
-            //opretter en liste kaldet 'auctions'
-            List<ItemToAuction> auctions = new List<ItemToAuction>();
-
-            var list = _repository.GetAllItems();
-                //PostItemToAuction();
-
-            //Hvis listen er tom
-            if (list == null)
-            {
-                _logger.LogInformation("INFO: Listen er tom");
-                return StatusCode(StatusCodes.Status204NoContent);
-            }
-            _logger.LogInformation($"INFO: Indhold af variabel list: {list}");
-
-            //Loop der sætter 'auction' instanser ind i 'auctions'-listen
-            foreach (Item item in list)
-            {
-                // Konverterer hvert 'Item' i list til det nye 'ItemToAuction' format
-                ItemToAuction auction = new ItemToAuction(item);
-                auctions.Add(auction);
-            }
-
-            return Ok();
-        }
-        //hvis andre fejl
-        catch (HttpRequestException ex)
-        {
-            _logger.LogInformation("FEJL: Metode PostItemToAuction kaldt {DT}, det gik galt" + ex,
-            DateTime.UtcNow.ToLongTimeString());
-        }
-        return StatusCode(StatusCodes.Status402PaymentRequired);
-    }*/
 
     [HttpPost("postItemsToAuction")]
     public async Task<IActionResult> PostItemsToAuction([FromBody] ItemToAuction[] itemToAuctionList)

@@ -27,7 +27,7 @@ namespace catalogServiceAPI.Services
         public List<ItemToAuction> PostItemToAuction()
         {
             _logger.LogInformation("INFO: Metoden SendItemsToAuction er kørt kl {DT}");
-
+            
             DateTime currentDT = DateTime.UtcNow;
 
             var itemList = _collection.Find(i => i.ItemStartDate < currentDT).ToList();
