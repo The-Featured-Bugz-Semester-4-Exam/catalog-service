@@ -6,10 +6,10 @@
           The Featured Bugz
       </Company>
       <FileVersion>
-          0.4.0
+          0.6.3
       </FileVersion>
       <Description>
-          0.1.0: første version af catalog-service, indholder forbindelse til MongoDB samt metode 'GetAllItems'
+          0.1.0: første version af catalog-service, indholder forbindelse til MongoDB samt metode 'GetAllItems' 
           0.1.1: Tilføjet metoden 'GetItemOnID' - Koden er ikke pæn, så den bør ændres
           0.1.2: Ændrede i filer
                  oprettede hjælpeklasse ItemsRepository
@@ -40,7 +40,17 @@
                     Ændrede medtode forhold til opbevaring af connectionstring
                     opdaterede metoder tilgængelige i 'IItemsRepository'
           0.5.0: tilføjdede httpPost-metode til at sende liste med ItemsToAuctions til AuctionService
-                 
+          0.5.1: fik genoprettet forbindelsen til DB'en og slettede hjælpeklassen 'DBContext'
+          0.5.2: fixede småfejl og bugs
+          0.5.3: aktiverede metode 'PostItemsToAuction'
+                    Den giver ingen fejl, men det vides ikke om den virker
+                    Der mangler data til at teste!!
+          0.6.0: Ændrede lidt i filopsætningen
+                    Lavede et 'ItemToAuctionRepository' klasse med dertilhørende interface
+          0.6.1: Tilføjede til metode til at kunne poste til auction-service
+          0.6.2: Flere små ændringer
+          0.6.3: Tilføjede metode 'GetPrice' og opdaterede metode 'PostAuction'
+          0.7.0 Logging og loki er tilføjet
       </Description>
 
     <TargetFramework>net7.0</TargetFramework>
@@ -53,6 +63,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NLog" Version="5.1.5" />
+    <PackageReference Include="NLog.Targets.Loki" Version="1.4.6" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="5.2.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="MongoDB.Bson" Version="2.19.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.19.1" />
