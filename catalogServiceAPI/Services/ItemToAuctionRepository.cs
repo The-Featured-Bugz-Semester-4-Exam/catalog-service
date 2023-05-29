@@ -4,7 +4,7 @@ using MongoDB.Driver;
 
 namespace catalogServiceAPI.Services
 {
-	public class ItemToAuctionRepository
+	public class ItemToAuctionRepository : IItemToAuctionRepository
 	{
         public readonly IConfiguration _config;
 
@@ -27,7 +27,7 @@ namespace catalogServiceAPI.Services
         public List<ItemToAuction> PostItemToAuction()
         {
             _logger.LogInformation("INFO: Metoden SendItemsToAuction er kørt kl {DT}");
-
+            
             DateTime currentDT = DateTime.UtcNow;
 
             var itemList = _collection.Find(i => i.ItemStartDate < currentDT).ToList();
@@ -41,8 +41,12 @@ namespace catalogServiceAPI.Services
 
             _logger.LogInformation($"INFO: Indhold af variabel 'list': {string.Join(", ", itemToAuctionList)}");
 
-            return itemToAuctionList.ToArray();
+            return itemToAuctionList;
         }
+
+
+        //
+
 
 
         //Metode til at styre cleanup af udløbne items 
@@ -62,6 +66,11 @@ namespace catalogServiceAPI.Services
             timer.Start();
 
             _logger.LogInformation($"timer startet: {now} - tid til næste interval: {intervalInMilliseconds}");
+        }
+
+        ItemToAuction[] IItemToAuctionRepository.PostItemToAuction()
+        {
+            throw new NotImplementedException();
         }
 
         /*private static void TimerElapsed()

@@ -13,6 +13,10 @@ namespace catalogServiceAPI.Models
 			ItemStartPrice = item.ItemStartPrice;
 			ItemEndDate = item.ItemEndDate;
 		}
+		public ItemToAuction()
+		{
+			
+		}
 	}
 }
 
