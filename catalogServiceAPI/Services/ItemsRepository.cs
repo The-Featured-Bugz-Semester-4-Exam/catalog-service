@@ -43,6 +43,7 @@ namespace catalogServiceAPI.Services
         public Item GetItemOnID(int ID)
         {
             var items = _collection.Find(_ => true).ToList();
+            _logger.LogInformation("finder Items: " + items.Count);
             var item = items.FirstOrDefault(i => i.ItemID == ID);
             _logger.LogInformation($"INFO: Indhold af item: {item}");
             return item;
