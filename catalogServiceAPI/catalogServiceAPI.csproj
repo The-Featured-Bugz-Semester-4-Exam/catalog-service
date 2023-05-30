@@ -51,6 +51,7 @@
           0.6.2: Flere små ændringer
           0.6.3: Tilføjede metode 'GetPrice' og opdaterede metode 'PostAuction'
           0.7.0 Logging og loki er tilføjet
+          1.0.0 Første version med dockerhub
       </Description>
 
     <TargetFramework>net7.0</TargetFramework>
