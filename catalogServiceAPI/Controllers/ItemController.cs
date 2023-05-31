@@ -47,16 +47,13 @@ public class ItemController : ControllerBase
     }
 
 
-
-    //Metode til at få alle Items ud af ItemsDB'en
-
     [HttpGet("getAllItems")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
     public IActionResult GetAllItems()
     {
         try
         {
-            _logger.LogInformation("SUCCES: Metode GetAllItems kaldt {DT}, det gik fint" + StatusCodes.Status200OK,
+            _logger.LogInformation("SUCCES: Metode GetAllItems called {DT} did well," + StatusCodes.Status200OK,
             DateTime.UtcNow.ToLongTimeString());
 
             var list = _repository.GetAllItems();
@@ -65,10 +62,10 @@ public class ItemController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogInformation("FEJL: Metode GetAllItems kaldt {DT}, det gik galt" + ex,
+            _logger.LogInformation("Error: Metode GetAllItems called {DT}, going wrong" + ex,
             DateTime.UtcNow.ToLongTimeString());
 
-            return StatusCode(StatusCodes.Status418ImATeapot);
+            return StatusCode(StatusCodes.Status404NotFound);
         }
     }
 
@@ -81,7 +78,7 @@ public class ItemController : ControllerBase
     {
         try
         {
-            _logger.LogInformation("INFO: Metode GetItemOnID kaldt {DT}",
+            _logger.LogInformation("INFO: Metode GetItemOnID called {DT}",
             DateTime.UtcNow.ToLongTimeString());
 
             var item = _repository.GetItemOnID(id);
@@ -90,15 +87,14 @@ public class ItemController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogInformation("FEJL: Metode GetItemOnID kaldt {DT}, det gik galt" + ex,
+            _logger.LogInformation("FEJL: Metode GetItemOnID called {DT}, going wrong" + ex,
             DateTime.UtcNow.ToLongTimeString());
 
-            return StatusCode(StatusCodes.Status418ImATeapot);
+            return StatusCode(StatusCodes.Status404NotFound);
         }
     }
 
 
-    //Metode til at oprette et item i cataloget
 
     [HttpPost("postItem")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
@@ -106,7 +102,7 @@ public class ItemController : ControllerBase
     {
         try
         {
-            _logger.LogInformation("SUCCES: Metode PostItem kaldt {DT}, det gik fint" + StatusCodes.Status200OK,
+            _logger.LogInformation("SUCCES: Metode PostItem called {DT}, did fine" + StatusCodes.Status200OK,
             DateTime.UtcNow.ToLongTimeString());
 
             _repository.PostItem(item);
@@ -115,7 +111,7 @@ public class ItemController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogInformation("FEJL: Metode PostItem kaldt {DT}, det gik galt" + ex,
+            _logger.LogInformation("FEJL: Metode PostItem called {DT}, going wrong" + ex,
             DateTime.UtcNow.ToLongTimeString());
 
             return StatusCode(StatusCodes.Status304NotModified);
@@ -131,7 +127,7 @@ public class ItemController : ControllerBase
     {
         try
         {
-            _logger.LogInformation("INFO: Metode DeleteItem kaldt {DT} på Item med ID {ID}" +
+            _logger.LogInformation("INFO: Metode DeleteItem called {DT} with item ID {ID}" +
             DateTime.UtcNow.ToLongTimeString());
 
             var item = _repository.DeleteItem(id);
@@ -140,15 +136,14 @@ public class ItemController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogInformation("FEJL: Metode DeleteItem kaldt {DT}, det gik galt" + ex,
+            _logger.LogInformation("Error: Metode DeleteItem called {DT}, going wrong" + ex,
             DateTime.UtcNow.ToLongTimeString());
 
-            return StatusCode(StatusCodes.Status418ImATeapot);
+            return StatusCode(StatusCodes.Status404NotFound);
         }
     }
 
 
-    //Metode til at update et item
 
     [HttpPut("updateItem/{id}")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
@@ -156,26 +151,26 @@ public class ItemController : ControllerBase
     {
         try
         {
-            _logger.LogInformation("INFO: Metode DeleteItem kaldt {DT} på Item med ID {ID}" +
+            _logger.LogInformation("INFO: Metode DeleteItem called {DT} with item ID {ID}" +
             DateTime.UtcNow.ToLongTimeString());
 
             bool isUpdated = _repository.UpdateItem(id, item);
 
             if (isUpdated == true)
             {
-                _logger.LogInformation($"SUCCES: item med ID {id} blev modificeret");
+                _logger.LogInformation($"SUCCES: item with ID {id} was modified");
                 return Ok();
             }
 
             else
             {
-                _logger.LogInformation($"FEJL: item med ID {id} blev ikke modificeret");
-                return StatusCode(StatusCodes.Status304NotModified);
+                _logger.LogInformation($"Error: item with ID {id} was not modified");
+                return StatusCode(StatusCodes.Status404NotFound);
             }
         }
         catch (Exception ex)
         {
-            _logger.LogInformation("FEJL: Metode DeleteItem kaldt {DT}, det gik galt" + ex,
+            _logger.LogInformation(ex,"Error: Metode DeleteItem called {DT}, going wrong",
             DateTime.UtcNow.ToLongTimeString());
 
             return StatusCode(StatusCodes.Status418ImATeapot);
@@ -183,29 +178,6 @@ public class ItemController : ControllerBase
     }
 
 
-    //Metode til at Sende et item til AuctionService
-
-    [HttpPost("postAuction/{id}")]
-    [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
-    public IActionResult PostAuction(int id)
-    {
-        try
-        {
-            _logger.LogInformation("INFO: Metode PostAuction kaldt {DT} på Item med ID {ID}" +
-            DateTime.UtcNow.ToLongTimeString());
-
-            var item = _repository.GetItemOnID(id);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogInformation("FEJL: Metode PostAuction kaldt {DT}, det gik galt" + ex,
-            DateTime.UtcNow.ToLongTimeString());
-
-            return StatusCode(StatusCodes.Status418ImATeapot);
-        }
-
-        return Ok();
-    }
 
     [HttpPost("postItemsToAuction")]
     public async Task<IActionResult> PostItemsToAuction([FromBody] ItemToAuction[] itemToAuctionList)
@@ -215,8 +187,8 @@ public class ItemController : ControllerBase
 
         using (var httpClient = new HttpClient())
         {
-            _logger.LogInformation($"INFO: til at post til auction-service: {_config["connAuk"]}/api/postAuctions");
-            var response = await httpClient.PostAsync($"{_config["connAuk"]}/api/postAuctions", content);
+            _logger.LogInformation($"INFO: Trying to Post to auction-service: {_config["connAuk"]}/auction/postAuctions");
+            var response = await httpClient.PostAsync($"{_config["connAuk"]}/auction/postAuctions", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -225,24 +197,24 @@ public class ItemController : ControllerBase
             }
             else
             {
-                _logger.LogError("FEJL: Failed to send items to the auction service.");
+                _logger.LogError("Error: Failed to send items to the auction service.");
                 return NotFound();
             }
         }
     }
 
 
-    //Metode til at hente en pris
+    
     [HttpGet("getAuctionPrice/{id}")]
     public async Task<IActionResult> GetAuctionPrice(int id)
     {
         using (var httpClient = new HttpClient())
         {
-            var response = await httpClient.GetAsync($"{_config["connAuk"]}/api/getAuctionPrice/{id}");
+            var response = await httpClient.GetAsync($"{_config["connAuk"]}/auction/getAuctionPrice/{id}");
             string responseContent = await response.Content.ReadAsStringAsync();
             int price = Convert.ToInt16(responseContent);
 
-            _logger.LogInformation($"INFO: env til auction-service: {_config["connAuk"]}");
+            _logger.LogInformation($"INFO: env to auction-service: {_config["connAuk"]}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -251,7 +223,7 @@ public class ItemController : ControllerBase
             }
             else
             {
-                _logger.LogError("FEJL: Failed to get price from the auction service. ");
+                _logger.LogError("Error: Failed to get price from the auction service. ");
                 return NotFound();
             }
         }
