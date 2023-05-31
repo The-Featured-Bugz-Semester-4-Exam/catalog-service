@@ -14,83 +14,84 @@ namespace catalogServiceAPI.Services
     public class ItemsRepository : IItemsRepository
     {
         public readonly IConfiguration _config;
-
         public readonly ILogger<ItemsRepository> _logger;
-
         private readonly IMongoCollection<Item> _collection;
 
         public ItemsRepository(ILogger<ItemsRepository> logger, IConfiguration config)
         {
             _logger = logger;
             _config = config;
-            _logger.LogInformation($"INFO: connecitonstring er: {config["connectionString"]}");
+
+            // Retrieve the connection string from the configuration
+            _logger.LogInformation($"INFO: connection string is: {config["connectionString"]}");
+
+            // Create a new instance of MongoClient and get the database and collection
             var mongoClient = new MongoClient(_config["connectionString"]);
             var database = mongoClient.GetDatabase(_config["database"]);
             _collection = database.GetCollection<Item>(_config["collection"]);
         }
 
-
         public List<Item> GetAllItems()
         {
+            // Find all items in the collection and convert to a list
             var list = _collection.Find(_ => true).ToList();
-            _logger.LogInformation($"INFO: indhold af liste: {list}");
+            _logger.LogInformation($"INFO: The Item collection: {list}");
             return list;
         }
 
-
-        //Metode til at hente et item på ID
-
         public Item GetItemOnID(int ID)
         {
+            // Find all items in the collection and retrieve the item with the matching ID
             var items = _collection.Find(_ => true).ToList();
             var item = items.FirstOrDefault(i => i.ItemID == ID);
-            _logger.LogInformation($"INFO: Indhold af item: {item}");
+            _logger.LogInformation($"INFO: Item data: {item}");
             return item;
         }
 
-
-        //Metode til at oprette et item i Postman med JSON
-
         public void PostItem(Item item)
         {
-            _logger.LogInformation($"INFO: Indhold af item til post: {item}");
+            // Log the data of the item being posted
+            _logger.LogInformation($"INFO: Item post data: {item}");
+
+            // Insert the item into the collection
             _collection.InsertOne(item);
         }
 
-
-        //Metode til at slette et item på ID eller dø i forsøget
-
         public bool DeleteItem(int ID)
         {
-            _logger.LogInformation($"INFO: ID på item flagged for delete: {ID}");
+            _logger.LogInformation($"INFO: Trying to delete item with ID: {ID}");
+
+            // Create a filter to find the item with the matching ID
             var filter = Builders<Item>.Filter.Eq(item => item.ItemID, ID);
+
+            // Delete the item from the collection
             var result = _collection.DeleteOne(filter);
-            _collection.DeleteOne(filter);
 
             if (result.DeletedCount == 1)
             {
-                _logger.LogInformation($"SUCCES: Item med ID {ID} er blevet slettet");
+                _logger.LogInformation($"INFO: Success, item with ID {ID} is deleted");
                 return true;
             }
             else
             {
-                _logger.LogInformation($"FEJL: Item med ID'et {ID} overlevede og kommer nu efter dig for hævn");
+                _logger.LogInformation($"INFO: Error, item with ID {ID} not found");
                 return false;
             }
         }
 
-
-        //Metode til at opdaterer et item
-
         public bool UpdateItem(int ID, Item updatedItem)
         {
+            _logger.LogInformation($"INFO: Trying to update item with ID: {ID}");
 
-            _logger.LogInformation($"INFO: ID på item flagged til opdatering: {ID}");
+            // Create a filter to find the item with the matching ID
             var filter = Builders<Item>.Filter.Eq(i => i.ItemID, ID);
+
+            // Find the existing item in the collection
             var existingItem = _collection.Find(filter).FirstOrDefault();
 
             if (existingItem != null)
             {
+                // Update the properties of the existing item with the new values
                 existingItem.ItemName = updatedItem.ItemName;
                 existingItem.ItemDescription = updatedItem.ItemDescription;
                 existingItem.ItemStartPrice = updatedItem.ItemStartPrice;
@@ -99,14 +100,18 @@ namespace catalogServiceAPI.Services
                 existingItem.ItemStartDate = updatedItem.ItemStartDate;
                 existingItem.ItemEndDate = updatedItem.ItemEndDate;
 
+                // Replace the existing item with the updated item in the collection
                 var result = _collection.ReplaceOne(filter, existingItem);
+
+                // Check if the item was successfully updated
                 bool isUpdated = result.ModifiedCount > 0;
 
+                _logger.LogInformation($"INFO: Success with updating item with ID {ID}");
                 return isUpdated;
             }
-
             else
             {
+                _logger.LogInformation($"INFO: Error with updating item with ID {ID}, item not found");
                 return false;
             }
         }

@@ -21,24 +21,6 @@ namespace catalogServiceAPI.Models
         public int ItemSellerID { get; set; }
         public DateTime ItemStartDate { get; set; }
         public DateTime ItemEndDate { get; set; }
-        // public int ItemCategory { get; set; }
-        // public int ItemCalatog { get; set; }
-
-        //Nice to have, billeder.
-        //public int ItemPictureID { get; set; }
-
-        /*
-        public Item(int taxabookingID, DateTime bookingTime, string kundeNavn, string kundeTlf, string adresseStart, string adressedDestination, DateTime startTidspunkt)
-        {
-            this.TaxabookingID = taxabookingID;
-            this.BookingTime = bookingTime;
-            this.KundeNavn = kundeNavn;
-            this.KundeTlf = kundeTlf;
-            this.AdresseStart = adresseStart;
-            this.AdresseDestination = adressedDestination;
-            this.StartTidspunkt = startTidspunkt;
-        }
-        */
     }
 }
 

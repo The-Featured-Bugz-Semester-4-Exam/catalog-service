@@ -34,7 +34,7 @@ public class ItemController : ControllerBase
 
 
 
-    [HttpGet("getVersion")]
+    [HttpGet("version")]
     public IEnumerable<string> GetVersion()
     {
         var properties = new List<string>();
@@ -215,8 +215,8 @@ public class ItemController : ControllerBase
 
         using (var httpClient = new HttpClient())
         {
+            _logger.LogInformation($"INFO: til at post til auction-service: {_config["connAuk"]}/api/postAuctions");
             var response = await httpClient.PostAsync($"{_config["connAuk"]}/api/postAuctions", content);
-            _logger.LogInformation($"INFO: env til auction-service: {_config["connAuk"]}");
 
             if (response.IsSuccessStatusCode)
             {
