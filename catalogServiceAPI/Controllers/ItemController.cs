@@ -13,7 +13,7 @@ using System.ComponentModel;
 namespace catalogServiceAPI.Controllers;
 
 [ApiController]
-[Route("api")]
+[Route("[controller]")]
 public class ItemController : ControllerBase
 {
     private readonly HttpClient _httpClient = new HttpClient();
