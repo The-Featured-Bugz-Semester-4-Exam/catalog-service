@@ -3,50 +3,60 @@ using catalogServiceAPI.Services;
 using NLog;
 using NLog.Web;
 
+// Set up NLog logger using configuration from app settings
 var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
-logger.Debug("init main");
 
 try
 {
-
+    // Create a new WebApplicationBuilder instance
     var builder = WebApplication.CreateBuilder(args);
 
-    // Add services to the container.
-
     builder.Services.AddControllers();
-    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    
+
     builder.Services.AddEndpointsApiExplorer();
+    
+    // Add Swagger generation to the services collection
     builder.Services.AddSwaggerGen();
 
+    // Register the ItemsRepository as a singleton service
     builder.Services.AddSingleton<IItemsRepository, ItemsRepository>();
+
+    // Register the ItemToAuctionRepository as a singleton service
     builder.Services.AddSingleton<IItemToAuctionRepository, ItemToAuctionRepository>();
+
+    // Clear any existing logging providers
     builder.Logging.ClearProviders();
+
+    // Use NLog for logging
     builder.Host.UseNLog();
 
+    // Build the application
     var app = builder.Build();
 
-    // Configure the HTTP request pipeline.
-    if (app.Environment.IsDevelopment())
-    {
-        app.UseSwagger();
-        app.UseSwaggerUI();
-    }
+    // Enable Swagger and SwaggerUI
+    app.UseSwagger();
+    app.UseSwaggerUI();
 
     app.UseHttpsRedirection();
 
+    // Enable authorization
     app.UseAuthorization();
 
+    // Map the controllers to routes
     app.MapControllers();
 
+    
     app.Run();
 }
 catch (System.Exception ex)
 {
-
+    
     logger.Error(ex, "Stopped program because of exception");
     throw;
 }
 finally
 {
+   
     NLog.LogManager.Shutdown();
 }

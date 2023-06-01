@@ -16,6 +16,7 @@ namespace catalogServiceAPI.Controllers;
 [Route("[controller]")]
 public class ItemController : ControllerBase
 {
+    // HTTP client used for making HTTP requests
     private readonly HttpClient _httpClient = new HttpClient();
 
     public readonly IConfiguration _config;
@@ -31,21 +32,22 @@ public class ItemController : ControllerBase
         _repository = repository;
     }
 
-
-
-
     [HttpGet("version")]
     public IEnumerable<string> GetVersion()
     {
-        var properties = new List<string>();
+        // Get the assembly where the Program class is defined
         var assembly = typeof(Program).Assembly;
+
+        var properties = new List<string>();
         foreach (var attribute in assembly.GetCustomAttributesData())
         {
+            // Iterate through the custom attributes of the assembly and retrieve their information
             properties.Add($"{attribute.AttributeType.Name} - {attribute.ToString()} \n");
         }
+
+        // Return the list of custom attribute information
         return properties;
     }
-
 
     [HttpGet("getAllItems")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
@@ -54,23 +56,22 @@ public class ItemController : ControllerBase
         try
         {
             _logger.LogInformation("SUCCES: Metode GetAllItems called {DT} did well," + StatusCodes.Status200OK,
-            DateTime.UtcNow.ToLongTimeString());
+                DateTime.UtcNow.ToLongTimeString());
 
+            // Get all items from the repository
             var list = _repository.GetAllItems();
 
+            // Return the item with a 200 OK status code
             return Ok(list);
         }
         catch (Exception ex)
         {
             _logger.LogInformation("Error: Metode GetAllItems called {DT}, going wrong" + ex,
-            DateTime.UtcNow.ToLongTimeString());
+                DateTime.UtcNow.ToLongTimeString());
 
             return StatusCode(StatusCodes.Status404NotFound);
         }
     }
-
-
-    //Metode til at få et specifikt Item ud af ItemsDB'en
 
     [HttpGet("getItem/{id}")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
@@ -79,22 +80,22 @@ public class ItemController : ControllerBase
         try
         {
             _logger.LogInformation("INFO: Metode GetItemOnID called {DT}",
-            DateTime.UtcNow.ToLongTimeString());
+                DateTime.UtcNow.ToLongTimeString());
 
+            // Get the item with the specified ID from the repository
             var item = _repository.GetItemOnID(id);
 
+            // Return the item with a 200 OK status code
             return Ok(item);
         }
         catch (Exception ex)
         {
             _logger.LogInformation("FEJL: Metode GetItemOnID called {DT}, going wrong" + ex,
-            DateTime.UtcNow.ToLongTimeString());
+                DateTime.UtcNow.ToLongTimeString());
 
             return StatusCode(StatusCodes.Status404NotFound);
         }
     }
-
-
 
     [HttpPost("postItem")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
@@ -103,23 +104,22 @@ public class ItemController : ControllerBase
         try
         {
             _logger.LogInformation("SUCCES: Metode PostItem called {DT}, did fine" + StatusCodes.Status200OK,
-            DateTime.UtcNow.ToLongTimeString());
+                DateTime.UtcNow.ToLongTimeString());
 
+            // Post the item to the repository
             _repository.PostItem(item);
 
+            // Return a 200 OK status code
             return Ok();
         }
         catch (Exception ex)
         {
             _logger.LogInformation("FEJL: Metode PostItem called {DT}, going wrong" + ex,
-            DateTime.UtcNow.ToLongTimeString());
+                DateTime.UtcNow.ToLongTimeString());
 
             return StatusCode(StatusCodes.Status304NotModified);
         }
     }
-
-
-    //Metode til at delete et item
 
     [HttpDelete("deleteItem/{id}")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
@@ -128,22 +128,21 @@ public class ItemController : ControllerBase
         try
         {
             _logger.LogInformation("INFO: Metode DeleteItem called {DT} with item ID {ID}" +
-            DateTime.UtcNow.ToLongTimeString());
+                DateTime.UtcNow.ToLongTimeString());
 
             var item = _repository.DeleteItem(id);
 
+            // Return a 200 OK status code
             return Ok();
         }
         catch (Exception ex)
         {
             _logger.LogInformation("Error: Metode DeleteItem called {DT}, going wrong" + ex,
-            DateTime.UtcNow.ToLongTimeString());
+                DateTime.UtcNow.ToLongTimeString());
 
             return StatusCode(StatusCodes.Status404NotFound);
         }
     }
-
-
 
     [HttpPut("updateItem/{id}")]
     [ProducesResponseType(typeof(Item), StatusCodes.Status200OK)]
@@ -152,42 +151,47 @@ public class ItemController : ControllerBase
         try
         {
             _logger.LogInformation("INFO: Metode DeleteItem called {DT} with item ID {ID}" +
-            DateTime.UtcNow.ToLongTimeString());
+                DateTime.UtcNow.ToLongTimeString());
 
             bool isUpdated = _repository.UpdateItem(id, item);
 
             if (isUpdated == true)
             {
                 _logger.LogInformation($"SUCCES: item with ID {id} was modified");
+
+                // Return a 200 OK status code if the item was successfully updated
                 return Ok();
             }
-
             else
             {
                 _logger.LogInformation($"Error: item with ID {id} was not modified");
+
+
                 return StatusCode(StatusCodes.Status404NotFound);
             }
         }
         catch (Exception ex)
         {
             _logger.LogInformation(ex,"Error: Metode DeleteItem called {DT}, going wrong",
-            DateTime.UtcNow.ToLongTimeString());
+                DateTime.UtcNow.ToLongTimeString());
 
             return StatusCode(StatusCodes.Status418ImATeapot);
         }
     }
 
-
-
     [HttpPost("postItemsToAuction")]
     public async Task<IActionResult> PostItemsToAuction([FromBody] ItemToAuction[] itemToAuctionList)
     {
+
+        // Convert the itemToAuctionList to JSON
         var json = JsonConvert.SerializeObject(itemToAuctionList);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
 
+        // Create a new HttpClient instance
         using (var httpClient = new HttpClient())
         {
             _logger.LogInformation($"INFO: Trying to Post to auction-service: {_config["connAuk"]}/auction/postAuctions");
+            // Send a POST request to the auction-service with the JSON content
             var response = await httpClient.PostAsync($"{_config["connAuk"]}/auction/postAuctions", content);
 
             if (response.IsSuccessStatusCode)
@@ -203,8 +207,6 @@ public class ItemController : ControllerBase
         }
     }
 
-
-    
     [HttpGet("getAuctionPrice/{id}")]
     public async Task<IActionResult> GetAuctionPrice(int id)
     {
